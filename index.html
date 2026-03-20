@@ -1,0 +1,1322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MazaoFlow</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --dg:#1A3D2B;--mg:#2D5A3D;--lg:#3D7A52;--lg2:#5A9A6A;
+  --gold:#C9A84C;--gl:#E8C97A;--gc:#F5E9C4;
+  --cream:#F5F0E8;--off:#F0EDE6;--w:#fff;
+  --red:#8B2E2E;--rl:#C44B4B;
+  --text:#1A3D2B;--muted:#6B8F76;--light:#9BB5A4;
+  --border:rgba(26,61,43,.1);--borderg:rgba(201,168,76,.25);
+  --sh:0 2px 16px rgba(26,61,43,.1);--shd:0 6px 32px rgba(26,61,43,.16);
+}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--off);color:var(--text);overflow-x:hidden}
+::-webkit-scrollbar{width:3px}::-webkit-scrollbar-thumb{background:var(--gold);border-radius:2px}
+
+/* ── LANDING ── */
+#landing{min-height:100vh;background:var(--dg);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:48px 24px;position:relative;overflow:hidden}
+#landing::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 50% at 50% 110%,rgba(201,168,76,.1) 0%,transparent 70%);pointer-events:none}
+.l-logo{font-family:'Playfair Display',serif;font-size:clamp(56px,11vw,96px);font-weight:900;color:var(--w);letter-spacing:-2px;line-height:1;margin-bottom:12px}
+.l-logo .flow{color:var(--gold)}
+.tw::after{content:'|';color:var(--gold);animation:cur .75s steps(1) infinite;margin-left:1px}
+@keyframes cur{0%,100%{opacity:1}50%{opacity:0}}
+.l-tag{font-size:15px;color:rgba(255,255,255,.45);font-weight:300;max-width:460px;margin:0 auto 44px;line-height:1.8;letter-spacing:.3px}
+.l-pills{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-bottom:48px}
+.lpill{border:1px solid rgba(201,168,76,.22);color:rgba(232,201,122,.7);font-size:11px;padding:5px 14px;border-radius:20px;letter-spacing:.4px}
+.l-cta{background:var(--gold);color:var(--dg);border:none;border-radius:10px;padding:14px 40px;font-size:14px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;letter-spacing:.3px;transition:background .2s,transform .15s}
+.l-cta:hover{background:var(--gl);transform:translateY(-1px)}
+
+/* ── SIGN IN ── */
+#signin{min-height:100vh;background:var(--dg);display:none;align-items:center;justify-content:center;padding:40px 24px}
+.si-card{background:rgba(255,255,255,.04);border:1px solid rgba(201,168,76,.14);border-radius:24px;padding:40px 32px;width:100%;max-width:390px}
+.si-logo{font-family:'Playfair Display',serif;font-size:26px;font-weight:700;color:var(--w);text-align:center;margin-bottom:4px}
+.si-logo span{color:var(--gold)}
+.si-sub{text-align:center;font-size:11px;color:rgba(255,255,255,.28);margin-bottom:28px;letter-spacing:.3px}
+.si-lbl{font-size:10px;color:rgba(255,255,255,.35);letter-spacing:.6px;text-transform:uppercase;margin-bottom:5px;display:block}
+.si-inp{width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:11px 14px;font-size:13px;color:var(--w);font-family:'DM Sans',sans-serif;margin-bottom:14px;outline:none;transition:border-color .2s}
+.si-inp:focus{border-color:rgba(201,168,76,.4)}
+.si-inp::placeholder{color:rgba(255,255,255,.18)}
+.role-opt{display:flex;align-items:center;gap:12px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:12px 14px;cursor:pointer;transition:all .2s;margin-bottom:8px}
+.role-opt:hover{border-color:rgba(201,168,76,.3);background:rgba(201,168,76,.05)}
+.role-opt.sel{border-color:var(--gold);background:rgba(201,168,76,.08)}
+.rdot{width:8px;height:8px;border-radius:50%;background:var(--muted);flex-shrink:0;transition:background .2s}
+.role-opt.sel .rdot{background:var(--gold)}
+.rname{font-size:13px;color:rgba(255,255,255,.8);font-weight:500}
+.rdesc{font-size:10px;color:rgba(255,255,255,.28);margin-top:1px}
+.si-btn{width:100%;background:var(--gold);color:var(--dg);border:none;border-radius:10px;padding:13px;font-size:13px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;margin-top:16px;transition:background .2s;letter-spacing:.3px}
+.si-btn:hover{background:var(--gl)}
+.si-hint{text-align:center;font-size:10px;color:rgba(255,255,255,.18);margin-top:12px}
+
+/* ── APP SHELL ── */
+#app{display:none;min-height:100vh;background:var(--off)}
+.sandbox{background:rgba(26,61,43,.05);border-bottom:1px solid rgba(201,168,76,.1);text-align:center;padding:5px;font-size:10px;color:var(--muted);letter-spacing:.3px}
+.topbar{background:var(--dg);height:52px;display:flex;align-items:center;justify-content:space-between;padding:0 20px;position:sticky;top:0;z-index:300;border-bottom:1px solid rgba(201,168,76,.15)}
+.tb-brand{font-family:'Playfair Display',serif;font-size:19px;font-weight:700;color:var(--w)}
+.tb-brand span{color:var(--gold)}
+.tb-r{display:flex;align-items:center;gap:10px}
+.tb-role{font-size:10px;font-weight:500;color:var(--gl);letter-spacing:.5px;text-transform:uppercase}
+.tb-av{width:30px;height:30px;border-radius:50%;background:var(--mg);border:1.5px solid var(--gold);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;color:var(--gold);cursor:pointer;flex-shrink:0}
+
+/* ── NOTIFICATION TOAST ── */
+.toast{position:fixed;top:60px;left:50%;transform:translateX(-50%) translateY(-80px);background:var(--dg);border:1px solid rgba(201,168,76,.25);border-radius:12px;padding:10px 16px;font-size:12px;color:var(--w);z-index:999;transition:transform .35s cubic-bezier(.34,1.56,.64,1);white-space:nowrap;box-shadow:var(--shd);max-width:340px;text-align:center}
+.toast.show{transform:translateX(-50%) translateY(0)}
+.toast .t-label{font-size:10px;color:var(--gl);font-weight:600;text-transform:uppercase;letter-spacing:.4px;margin-bottom:2px}
+
+/* ── SPLIT LAYOUT ── */
+.split-wrap{display:grid;grid-template-columns:1fr 1fr;gap:0;min-height:calc(100vh - 100px)}
+.split-pane{padding:20px;overflow-y:auto}
+.split-pane.left{background:var(--dg);border-right:1px solid rgba(201,168,76,.1)}
+.split-pane.right{background:var(--off)}
+.pane-label{font-size:10px;font-weight:600;letter-spacing:.7px;text-transform:uppercase;margin-bottom:14px;text-align:center}
+.split-pane.left .pane-label{color:var(--gl)}
+.split-pane.right .pane-label{color:var(--muted)}
+
+/* ── FEATURE PHONE ── */
+.fp-wrap{display:flex;flex-direction:column;align-items:center;gap:8px}
+.feature-phone{width:220px;background:#1a1a1a;border-radius:22px;padding:10px;box-shadow:0 8px 40px rgba(0,0,0,.5)}
+.fp-top{width:60px;height:14px;background:#111;border-radius:0 0 10px 10px;margin:0 auto 6px}
+.fp-screen{background:#0d0d0d;border-radius:8px;padding:12px 10px;min-height:200px;position:relative;overflow:hidden}
+.fp-crt{position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(0,255,80,.015) 0,rgba(0,255,80,.015) 1px,transparent 1px,transparent 3px);pointer-events:none}
+.fp-hdr{display:flex;justify-content:space-between;font-size:8px;color:#3a3a3a;margin-bottom:7px;font-family:'DM Mono',monospace}
+.fp-line{font-family:'DM Mono',monospace;font-size:10px;line-height:1.7;color:#aaa;opacity:0;transform:translateX(-5px);transition:opacity .2s,transform .2s}
+.fp-line.v{opacity:1;transform:none}
+.fp-line.g{color:#E8C97A}.fp-line.gr{color:#4ade80}.fp-line.d{color:#333}.fp-line.r{color:#ff8080}
+.fp-line.cur::after{content:'_';color:#E8C97A;animation:cur .8s steps(1) infinite}
+.fp-sms{background:rgba(232,201,122,.08);border:1px solid rgba(232,201,122,.15);border-radius:5px;padding:7px 8px;margin-top:8px;font-family:'DM Mono',monospace;font-size:9px;color:#E8C97A;display:none;line-height:1.5}
+.fp-sms.v{display:block}
+.fp-pad{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;margin-top:8px}
+.fp-k{background:#252525;border:none;border-radius:5px;color:#777;font-size:10px;font-family:'DM Mono',monospace;padding:7px 2px;cursor:pointer;transition:background .12s,color .12s;text-align:center}
+.fp-k:hover{background:#2e2e2e}.fp-k:active{background:var(--gold);color:#000}
+.fp-hint{font-size:10px;color:rgba(255,255,255,.25);text-align:center;max-width:220px;line-height:1.5}
+.fp-net{display:flex;gap:5px;align-items:center;justify-content:center;margin-top:6px;flex-wrap:wrap}
+.fp-net-badge{font-size:9px;color:rgba(255,255,255,.3);border:1px solid rgba(255,255,255,.1);border-radius:3px;padding:1px 5px;font-family:'DM Mono',monospace}
+.fp-net-badge.active{color:var(--gold);border-color:rgba(201,168,76,.4)}
+
+/* ── SMARTPHONE FRAME ── */
+.sp-wrap{display:flex;flex-direction:column;align-items:center;gap:8px}
+.smartphone{width:280px;background:#111;border-radius:44px;padding:12px 8px;box-shadow:0 8px 40px rgba(0,0,0,.4);position:relative}
+.sp-notch{width:80px;height:22px;background:#111;border-radius:0 0 16px 16px;margin:0 auto 4px;position:relative;z-index:2}
+.sp-screen{background:var(--w);border-radius:32px;overflow:hidden;height:580px;position:relative;display:flex;flex-direction:column}
+.sp-status{background:var(--dg);padding:6px 14px;display:flex;justify-content:space-between;align-items:center;flex-shrink:0}
+.sp-status span{font-size:9px;color:rgba(255,255,255,.55);font-weight:500}
+.sp-body{flex:1;overflow-y:auto;overflow-x:hidden;background:var(--off);position:relative;scrollbar-width:none}
+.sp-body::-webkit-scrollbar{display:none}
+
+/* ── ROLE SWITCHER ── */
+.role-bar{display:flex;background:var(--w);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:10;flex-shrink:0}
+.role-tab{flex:1;padding:9px 4px;font-size:10px;font-weight:500;color:var(--muted);background:none;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;border-bottom:2px solid transparent;transition:all .2s;text-align:center}
+.role-tab.active{color:var(--dg);border-bottom-color:var(--gold);font-weight:600}
+
+/* ── APP SCREENS ── */
+.screen{display:none;flex:1;flex-direction:column;overflow:hidden}
+.screen.active{display:flex}
+.screen-scroll{flex:1;overflow-y:auto;padding:14px;scrollbar-width:none}
+.screen-scroll::-webkit-scrollbar{display:none}
+
+/* NAV BAR */
+.app-nav{background:var(--w);border-top:1px solid var(--border);display:flex;flex-shrink:0;box-shadow:0 -2px 12px rgba(26,61,43,.06)}
+.nav-item{flex:1;padding:8px 2px 10px;background:none;border:none;cursor:pointer;font-size:9px;color:var(--muted);font-family:'DM Sans',sans-serif;display:flex;flex-direction:column;align-items:center;gap:2px;transition:color .2s}
+.nav-item.active{color:var(--dg)}
+.nav-dot{width:16px;height:2.5px;border-radius:2px;background:transparent;transition:background .2s;margin-bottom:1px}
+.nav-item.active .nav-dot{background:var(--gold)}
+.nav-icon{width:16px;height:16px;display:flex;align-items:center;justify-content:center}
+
+/* CARDS */
+.card{background:var(--w);border-radius:14px;overflow:hidden;margin-bottom:10px;box-shadow:var(--sh);transition:transform .18s,box-shadow .18s}
+.card:hover{transform:translateY(-1px);box-shadow:var(--shd)}
+.card-head{background:var(--dg);padding:10px 12px;display:flex;align-items:center;justify-content:space-between}
+.card-title{font-size:12px;font-weight:500;color:var(--w)}
+.badge{font-size:9px;font-weight:700;padding:3px 8px;border-radius:4px;letter-spacing:.3px;text-transform:uppercase}
+.badge.gold{background:var(--gold);color:var(--dg)}
+.badge.green{background:var(--lg);color:var(--w)}
+.badge.red{background:var(--rl);color:var(--w)}
+.badge.grey{background:rgba(255,255,255,.15);color:rgba(255,255,255,.7)}
+.card-body{padding:11px 12px}
+
+/* PRODUCE IMAGE */
+.produce-img{width:100%;height:90px;object-fit:cover;display:block}
+.produce-img-placeholder{width:100%;height:90px;background:linear-gradient(135deg,var(--mg),var(--dg));display:flex;align-items:center;justify-content:center;font-size:24px}
+
+/* ROWS */
+.row{display:flex;justify-content:space-between;align-items:center;padding:4px 0;border-bottom:1px solid var(--border);font-size:11px}
+.row:last-child{border:none}
+.rk{color:var(--muted)}.rv{font-weight:500;color:var(--text)}
+.rv.gold{color:var(--gold)}.rv.green{color:var(--lg)}.rv.red{color:var(--red)}
+
+/* STATS */
+.stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px}
+.stat{background:var(--w);border-radius:12px;padding:12px 8px;text-align:center;border-top:2px solid var(--border)}
+.stat.g{border-top-color:var(--gold)}.stat.gr{border-top-color:var(--lg)}.stat.r{border-top-color:var(--red)}
+.stat-n{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--text);line-height:1;margin-bottom:2px}
+.stat-l{font-size:9px;color:var(--muted);line-height:1.3}
+
+/* FILTER BAR */
+.filter-bar{display:flex;gap:5px;overflow-x:auto;margin-bottom:10px;scrollbar-width:none;padding:2px}
+.filter-bar::-webkit-scrollbar{display:none}
+.fbtn{background:var(--w);border:1px solid var(--border);border-radius:16px;padding:4px 12px;font-size:10px;font-weight:500;color:var(--muted);cursor:pointer;white-space:nowrap;transition:all .15s;font-family:'DM Sans',sans-serif;flex-shrink:0}
+.fbtn.active{background:var(--dg);color:var(--gl);border-color:var(--dg)}
+
+/* TAGS */
+.tags{display:flex;flex-wrap:wrap;gap:3px;margin-top:6px}
+.tag{background:var(--off);border:1px solid var(--borderg);color:var(--text);font-size:9px;font-weight:500;padding:2px 7px;border-radius:4px}
+
+/* AVATAR */
+.avatar{width:38px;height:38px;border-radius:50%;background:var(--mg);border:2px solid var(--gold);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;color:var(--gold);flex-shrink:0}
+.avatar.corp{background:var(--dg);font-size:10px}
+
+/* MAP WIDGET */
+.map-widget{background:#e8f0e8;border-radius:10px;height:80px;position:relative;overflow:hidden;margin-bottom:8px;border:1px solid rgba(26,61,43,.12)}
+.map-bg{position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(26,61,43,.04) 0,rgba(26,61,43,.04) 1px,transparent 1px,transparent 20px),repeating-linear-gradient(90deg,rgba(26,61,43,.04) 0,rgba(26,61,43,.04) 1px,transparent 1px,transparent 20px)}
+.map-road{position:absolute;background:rgba(255,255,255,.6);border-radius:2px}
+.map-road.h{height:3px;width:70%;top:50%;left:5%;transform:translateY(-50%)}
+.map-road.v{width:3px;height:60%;left:40%;top:15%}
+.map-pin{position:absolute;width:18px;height:18px;background:var(--rl);border-radius:50% 50% 50% 0;transform:rotate(-45deg);border:2px solid var(--w);box-shadow:0 2px 6px rgba(0,0,0,.3)}
+.map-pin::after{content:'';position:absolute;top:50%;left:50%;width:6px;height:6px;background:var(--w);border-radius:50%;transform:translate(-50%,-50%)}
+.map-pin.farm{background:var(--lg);left:30%;top:20%}
+.map-pin.dest{background:var(--rl);right:20%;bottom:20%}
+.map-label{position:absolute;font-size:8px;font-weight:600;color:var(--dg);background:rgba(255,255,255,.9);padding:2px 5px;border-radius:3px}
+.map-route{position:absolute;border:2px dashed var(--gold);border-radius:20px;width:40%;height:40%;top:25%;left:32%;pointer-events:none}
+
+/* QTY */
+.qty-ctrl{display:flex;align-items:center;gap:6px;background:var(--off);border-radius:8px;padding:7px 10px;margin-top:8px}
+.qty-btn{width:24px;height:24px;border-radius:5px;background:var(--dg);color:var(--w);border:none;font-size:13px;cursor:pointer;font-weight:500;display:flex;align-items:center;justify-content:center;transition:background .12s;flex-shrink:0}
+.qty-btn:hover{background:var(--mg)}
+.qty-val{flex:1;text-align:center;font-family:'DM Mono',monospace;font-size:12px;font-weight:500;color:var(--text)}
+
+/* COST TABLE */
+.cost-table{background:var(--dg);border-radius:10px;padding:12px;margin-top:8px}
+.ct-title{font-size:9px;font-weight:600;color:var(--gl);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px}
+.ct-row{display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid rgba(255,255,255,.05);font-size:11px}
+.ct-row:last-child{border:none;padding-top:6px}
+.ck{color:rgba(255,255,255,.4)}.cv{color:var(--w);font-family:'DM Mono',monospace;font-weight:500}
+.cv.gold{color:var(--gold);font-weight:700}.cv.strike{color:rgba(255,100,100,.5);text-decoration:line-through}
+.ck.save{color:var(--gl);font-weight:600}
+
+/* TRANSPORT TOGGLE */
+.t-toggle{display:flex;align-items:center;gap:8px;padding:7px 0;margin-top:6px;border-top:1px solid rgba(255,255,255,.06)}
+.t-toggle-lbl{font-size:10px;color:rgba(255,255,255,.4);flex:1}
+.tswitch{position:relative;width:34px;height:18px;cursor:pointer;flex-shrink:0}
+.tswitch input{opacity:0;width:0;height:0;position:absolute}
+.ttrack{position:absolute;inset:0;background:rgba(255,255,255,.12);border-radius:9px;transition:background .2s}
+.tswitch input:checked+.ttrack{background:var(--gold)}
+.tthumb{position:absolute;top:2px;left:2px;width:14px;height:14px;background:var(--w);border-radius:50%;transition:transform .2s;pointer-events:none}
+.tswitch input:checked~.tthumb{transform:translateX(16px)}
+
+/* ACTION BUTTONS */
+.abtn{width:100%;background:var(--dg);color:var(--w);border:none;border-radius:9px;padding:11px;font-size:12px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;margin-top:8px;transition:background .2s;letter-spacing:.2px}
+.abtn:hover{background:var(--mg)}
+.abtn.gold{background:var(--gold);color:var(--dg)}.abtn.gold:hover{background:var(--gl)}
+.abtn.outline{background:transparent;color:var(--text);border:1px solid var(--dg)}
+.abtn.green{background:var(--lg);color:var(--w)}.abtn.green:hover{background:var(--lg2)}
+
+/* FORM */
+.form-wrap{background:var(--w);border-radius:14px;padding:14px;margin-bottom:10px}
+.flbl{font-size:10px;color:var(--muted);letter-spacing:.4px;text-transform:uppercase;margin-bottom:4px;display:block;margin-top:10px}
+.flbl:first-child{margin-top:0}
+.finp,.fsel{width:100%;background:var(--off);border:1px solid var(--border);border-radius:8px;padding:9px 11px;font-size:12px;color:var(--text);font-family:'DM Sans',sans-serif;outline:none;transition:border-color .2s;appearance:none}
+.finp:focus,.fsel:focus{border-color:var(--borderg)}
+.floor-ok{background:rgba(45,90,61,.06);border:1px solid rgba(45,90,61,.15);border-radius:8px;padding:8px 11px;font-size:10px;color:var(--mg);margin-top:6px}
+.floor-warn{background:rgba(139,46,46,.05);border:1px solid rgba(139,46,46,.15);border-radius:8px;padding:8px 11px;font-size:10px;color:var(--red);margin-top:6px;display:none}
+
+/* PROFIT CALC */
+.pcalc{background:var(--dg);border-radius:12px;padding:13px;margin-top:10px}
+.pc-hd{font-size:9px;font-weight:600;color:var(--gl);text-transform:uppercase;letter-spacing:.5px;margin-bottom:9px}
+.pc-row{display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid rgba(255,255,255,.05);font-size:11px}
+.pc-row:last-child{border:none;padding-top:7px}
+.pk{color:rgba(255,255,255,.4)}.pv{color:var(--w);font-family:'DM Mono',monospace}
+.pc-row.tot .pk{color:var(--gl);font-weight:600}.pc-row.tot .pv{color:var(--gold);font-size:14px;font-weight:700}
+.pc-sl{margin-top:10px;display:flex;align-items:center;gap:8px}
+.pc-sl label{font-size:9px;color:rgba(255,255,255,.28);white-space:nowrap}
+input[type=range]{flex:1;accent-color:var(--gold)}
+
+/* RECEIPT */
+.receipt{background:var(--w);border-radius:14px;overflow:hidden;font-family:'DM Mono',monospace;margin-bottom:10px}
+.rc-head{background:var(--dg);padding:13px 14px;text-align:center}
+.rc-head .rt{font-family:'Playfair Display',serif;font-size:14px;color:var(--gold);font-weight:700}
+.rc-head .rs{font-size:8px;color:rgba(255,255,255,.35);margin-top:2px}
+.rc-body{padding:11px 14px}
+.rc-row{display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px dashed rgba(26,61,43,.07);font-size:10px}
+.rc-row:last-child{border:none}
+.rck{color:var(--muted)}.rcv{font-weight:500;color:var(--text)}
+.rc-foot{background:var(--gold);padding:9px 14px;text-align:center}
+.rc-foot p{font-size:9px;font-weight:700;color:var(--dg)}
+.rc-foot .hash{font-size:7px;color:rgba(26,61,43,.45);margin-top:2px;word-break:break-all}
+
+/* REVIEW */
+.rv-card{background:var(--w);border-radius:14px;padding:14px;margin-bottom:10px}
+.rv-title{font-size:12px;font-weight:500;color:var(--text);margin-bottom:3px}
+.rv-sub{font-size:10px;color:var(--muted);margin-bottom:10px}
+.star-row{display:flex;gap:6px;margin-bottom:4px}
+.star-btn{background:none;border:none;cursor:pointer;padding:0;transition:transform .12s}
+.star-btn:hover{transform:scale(1.25)}
+.star-meaning{font-size:10px;color:var(--muted);min-height:16px;font-style:italic;margin-bottom:8px}
+.rtags{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px}
+.rtag{background:var(--off);border:1px solid var(--border);color:var(--muted);font-size:10px;padding:4px 9px;border-radius:6px;cursor:pointer;transition:all .15s}
+.rtag.sel{background:var(--gc);border-color:var(--borderg);color:var(--text)}
+.rtag.neg.sel{background:rgba(139,46,46,.07);border-color:rgba(139,46,46,.2);color:var(--red)}
+
+/* DRIVER CARD */
+.job-card{background:var(--w);border-radius:14px;overflow:hidden;margin-bottom:10px;box-shadow:var(--sh)}
+.jc-head{background:var(--mg);padding:10px 12px;display:flex;justify-content:space-between;align-items:center}
+.jt{font-size:12px;font-weight:500;color:var(--w)}
+.jc-body{padding:11px 12px}
+.earn-bar{background:rgba(201,168,76,.07);border:1px solid var(--borderg);border-radius:8px;padding:9px 11px;display:flex;justify-content:space-between;align-items:center;margin-top:8px}
+.el{font-size:10px;color:var(--muted)}.ev{font-family:'DM Mono',monospace;font-size:13px;color:var(--gold);font-weight:500}
+
+/* PROFILE */
+.profile-head{display:flex;align-items:center;gap:12px;background:var(--w);border-radius:14px;padding:14px;margin-bottom:10px}
+.profile-info{flex:1}
+.profile-name{font-size:14px;font-weight:600;color:var(--text)}
+.profile-type{font-size:10px;color:var(--muted);margin-top:2px}
+.profile-trust{display:flex;align-items:center;gap:6px;margin-top:4px}
+
+/* VEHICLE CARD */
+.vehicle-card{background:var(--w);border-radius:14px;padding:13px;margin-bottom:10px;border-left:3px solid var(--gold)}
+.vc-title{font-size:12px;font-weight:600;color:var(--text);margin-bottom:8px}
+
+/* INFO BOX */
+.info{background:var(--cream);border-left:3px solid var(--gold);border-radius:0 8px 8px 0;padding:9px 12px;font-size:11px;color:var(--text);line-height:1.6;margin-bottom:10px}
+.sms-notif{background:rgba(26,61,43,.05);border:1px solid rgba(26,61,43,.1);border-radius:8px;padding:9px 11px;font-family:'DM Mono',monospace;font-size:10px;color:var(--text);line-height:1.5;margin-bottom:10px}
+
+/* TECH STACK */
+.tech-stack{background:var(--w);border-radius:14px;padding:13px}
+.ts-title{font-size:10px;font-weight:600;color:var(--text);text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px}
+.ts-row{display:flex;align-items:flex-start;gap:10px;padding:7px 0;border-bottom:1px solid var(--border)}
+.ts-row:last-child{border:none}
+.ts-dot{width:7px;height:7px;border-radius:50%;background:var(--gold);flex-shrink:0;margin-top:4px}
+.ts-name{font-size:11px;font-weight:500;color:var(--text);min-width:110px}
+.ts-desc{font-size:10px;color:var(--muted);line-height:1.4}
+.ts-note{font-size:10px;color:var(--light);font-style:italic;margin-top:8px;padding-top:8px;border-top:1px solid var(--border)}
+
+/* SECTION HEADER */
+.sec-hd{font-size:10px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px}
+.sec-div{height:1px;background:var(--border);margin:10px 0}
+
+/* FULL SCREEN VIEW (listing detail, payment etc) */
+.fullview{position:absolute;inset:0;background:var(--w);z-index:50;display:none;flex-direction:column;animation:slideIn .25s ease}
+.fullview.open{display:flex}
+@keyframes slideIn{from{transform:translateX(100%)}to{transform:translateX(0)}}
+.fv-head{background:var(--dg);padding:10px 14px;display:flex;align-items:center;gap:10px;flex-shrink:0}
+.fv-back{background:none;border:none;color:var(--gl);font-size:18px;cursor:pointer;padding:0;line-height:1}
+.fv-title{font-size:13px;font-weight:500;color:var(--w);flex:1}
+.fv-body{flex:1;overflow-y:auto;padding:14px;scrollbar-width:none}
+.fv-body::-webkit-scrollbar{display:none}
+
+/* SUCCESS SCREEN */
+.success-screen{position:absolute;inset:0;background:var(--dg);z-index:60;display:none;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:32px;animation:fadeIn .3s ease}
+.success-screen.open{display:flex}
+@keyframes fadeIn{from{opacity:0;transform:scale(.95)}to{opacity:1;transform:scale(1)}}
+.ss-circle{width:72px;height:72px;border-radius:50%;background:rgba(201,168,76,.15);border:2px solid var(--gold);display:flex;align-items:center;justify-content:center;font-size:28px;margin-bottom:16px}
+.ss-title{font-family:'Playfair Display',serif;font-size:20px;color:var(--w);font-weight:700;margin-bottom:6px}
+.ss-sub{font-size:12px;color:rgba(255,255,255,.45);line-height:1.6;margin-bottom:24px;max-width:260px}
+.ss-btn{background:var(--gold);color:var(--dg);border:none;border-radius:10px;padding:12px 28px;font-size:13px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif}
+
+@media(max-width:700px){.split-wrap{grid-template-columns:1fr}.split-pane.left{display:none}.smartphone{width:100%;max-width:340px}}
+</style>
+</head>
+<body>
+
+<!-- LANDING -->
+<div id="landing">
+  <div class="l-logo">Mazao<span class="flow tw" id="tw">Flow</span></div>
+  <p class="l-tag">USSD for the farmer. App for the market. Connecting Kenyan farmers to verified buyers, transport, and formal credit through the phone they already own.</p>
+  <div class="l-pills">
+    <span class="lpill">Market</span><span class="lpill">Move</span><span class="lpill">Pay</span>
+    <span class="lpill">All Networks</span><span class="lpill">KES 0 to Farmer</span>
+  </div>
+  <button class="l-cta" onclick="goSI()">Enter Platform</button>
+</div>
+
+<!-- SIGN IN -->
+<div id="signin">
+  <div class="si-card">
+    <div class="si-logo">Mazao<span>Flow</span></div>
+    <div class="si-sub">Sandbox environment. Demonstration data.</div>
+    <label class="si-lbl">National ID</label>
+    <input class="si-inp" type="text" value="12345678">
+    <label class="si-lbl">Phone (OTP sent on sign in)</label>
+    <input class="si-inp" type="text" value="+254 712 345 678">
+    <label class="si-lbl" style="margin-top:2px;">Starting role</label>
+    <div class="role-opt sel" onclick="pickR(this,'farmer')">
+      <div class="rdot"></div>
+      <div><div class="rname">Farmer</div><div class="rdesc">Post produce, track receipts, build credit history</div></div>
+    </div>
+    <div class="role-opt" onclick="pickR(this,'buyer')">
+      <div class="rdot"></div>
+      <div><div class="rname">Buyer</div><div class="rdesc">Browse listings, compare prices, pay via M-Pesa escrow</div></div>
+    </div>
+    <div class="role-opt" onclick="pickR(this,'driver')">
+      <div class="rdot"></div>
+      <div><div class="rname">Transporter</div><div class="rdesc">Accept delivery jobs, earn per trip, switch roles anytime</div></div>
+    </div>
+    <button class="si-btn" onclick="doSI()">Continue</button>
+    <div class="si-hint">One account. All three roles. Switch anytime from the top right.</div>
+  </div>
+</div>
+
+<!-- APP -->
+<div id="app">
+  <div class="sandbox">Sandbox environment. All users, transactions, and ratings are demonstration data.</div>
+  <div class="topbar">
+    <div class="tb-brand">Mazao<span>Flow</span></div>
+    <div class="tb-r">
+      <div class="tb-role" id="tb-role">Farmer</div>
+      <div class="tb-av" id="tb-av" onclick="cycleRole()" title="Switch role">JW</div>
+    </div>
+  </div>
+
+  <!-- TOAST -->
+  <div class="toast" id="toast"><div class="t-label" id="toast-lbl"></div><div id="toast-msg"></div></div>
+
+  <!-- SPLIT -->
+  <div class="split-wrap">
+
+    <!-- LEFT: USSD -->
+    <div class="split-pane left">
+      <div class="pane-label">Feature Phone, USSD *384#</div>
+      <div class="fp-wrap">
+        <div class="feature-phone">
+          <div class="fp-top"></div>
+          <div class="fp-screen">
+            <div class="fp-crt"></div>
+            <div class="fp-hdr"><span id="fp-net-lbl">Airtel</span><span>||||</span></div>
+            <div id="fp-lines"></div>
+            <div class="fp-sms" id="fp-sms">SMS: MazaoFlow receipt #24. Tomatoes 200kg. Net paid: KES 7,980. Trust: 94% (+1).</div>
+          </div>
+          <div class="fp-pad">
+            <button class="fp-k" onclick="fpKey('1')">1</button><button class="fp-k" onclick="fpKey('2')">2</button><button class="fp-k" onclick="fpKey('3')">3</button>
+            <button class="fp-k" onclick="fpKey('4')">4</button><button class="fp-k" onclick="fpKey('5')">5</button><button class="fp-k" onclick="fpKey('6')">6</button>
+            <button class="fp-k" onclick="fpKey('7')">7</button><button class="fp-k" onclick="fpKey('8')">8</button><button class="fp-k" onclick="fpKey('9')">9</button>
+            <button class="fp-k" onclick="fpKey('*')">*</button><button class="fp-k" onclick="fpKey('0')">0</button><button class="fp-k" onclick="fpKey('#')">#</button>
+          </div>
+        </div>
+        <div class="fp-hint">Press 1 to sell, 2 to buy (standing order), 3 for transport, 5 for trust score. Press 0 to go back.</div>
+        <div class="fp-net">
+          <span class="fp-net-badge active" id="n0">Airtel</span>
+          <span class="fp-net-badge" id="n1">Safaricom</span>
+          <span class="fp-net-badge" id="n2">Equitel</span>
+          <span class="fp-net-badge" id="n3">Telkom</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT: SMARTPHONE -->
+    <div class="split-pane right">
+      <div class="pane-label">Mobile App, Same Backend</div>
+      <div class="sp-wrap">
+        <div class="smartphone">
+          <div class="sp-notch"></div>
+          <div class="sp-screen" id="sp-screen">
+
+            <!-- STATUS BAR -->
+            <div class="sp-status"><span id="sp-name">Jane Wanjiku</span><span id="sp-trust">Trust 94%</span></div>
+
+            <!-- ROLE SWITCHER -->
+            <div class="role-bar">
+              <button class="role-tab active" id="rt-farmer" onclick="switchAppRole('farmer')">Farmer</button>
+              <button class="role-tab" id="rt-buyer" onclick="switchAppRole('buyer')">Buyer</button>
+              <button class="role-tab" id="rt-driver" onclick="switchAppRole('driver')">Driver</button>
+            </div>
+
+            <!-- FARMER SCREEN -->
+            <div class="screen active" id="sc-farmer">
+              <div class="app-nav" id="nav-farmer">
+                <button class="nav-item active" onclick="showFarmerTab('home',this)"><div class="nav-dot"></div><div class="nav-icon">H</div><span>Home</span></button>
+                <button class="nav-item" onclick="showFarmerTab('post',this)"><div class="nav-dot"></div><div class="nav-icon">P</div><span>Post</span></button>
+                <button class="nav-item" onclick="showFarmerTab('receipts',this)"><div class="nav-dot"></div><div class="nav-icon">R</div><span>Receipts</span></button>
+              </div>
+              <div class="screen-scroll" id="body-farmer"></div>
+            </div>
+
+            <!-- BUYER SCREEN -->
+            <div class="screen" id="sc-buyer">
+              <div class="app-nav" id="nav-buyer">
+                <button class="nav-item active" onclick="showBuyerTab('home',this)"><div class="nav-dot"></div><div class="nav-icon">H</div><span>Home</span></button>
+                <button class="nav-item" onclick="showBuyerTab('market',this)"><div class="nav-dot"></div><div class="nav-icon">M</div><span>Market</span></button>
+                <button class="nav-item" onclick="showBuyerTab('orders',this)"><div class="nav-dot"></div><div class="nav-icon">O</div><span>Orders</span></button>
+                <button class="nav-item" onclick="showBuyerTab('review',this)"><div class="nav-dot"></div><div class="nav-icon">V</div><span>Review</span></button>
+              </div>
+              <div class="screen-scroll" id="body-buyer"></div>
+            </div>
+
+            <!-- DRIVER SCREEN -->
+            <div class="screen" id="sc-driver">
+              <div class="app-nav" id="nav-driver">
+                <button class="nav-item active" onclick="showDriverTab('home',this)"><div class="nav-dot"></div><div class="nav-icon">H</div><span>Home</span></button>
+                <button class="nav-item" onclick="showDriverTab('jobs',this)"><div class="nav-dot"></div><div class="nav-icon">J</div><span>Jobs</span></button>
+                <button class="nav-item" onclick="showDriverTab('route',this)"><div class="nav-dot"></div><div class="nav-icon">R</div><span>Route</span></button>
+                <button class="nav-item" onclick="showDriverTab('earn',this)"><div class="nav-dot"></div><div class="nav-icon">E</div><span>Earn</span></button>
+              </div>
+              <div class="screen-scroll" id="body-driver"></div>
+            </div>
+
+            <!-- FULLSCREEN VIEWS -->
+            <div class="fullview" id="fv-listing">
+              <div class="fv-head">
+                <button class="fv-back" onclick="closeFV('fv-listing')">&#8592;</button>
+                <div class="fv-title" id="fv-listing-title">Listing Detail</div>
+              </div>
+              <div class="fv-body" id="fv-listing-body"></div>
+            </div>
+
+            <div class="fullview" id="fv-payment">
+              <div class="fv-head">
+                <button class="fv-back" onclick="closeFV('fv-payment')">&#8592;</button>
+                <div class="fv-title">M-Pesa Escrow Payment</div>
+              </div>
+              <div class="fv-body" id="fv-payment-body"></div>
+            </div>
+
+            <div class="success-screen" id="ss-payment">
+              <div class="ss-circle">&#10003;</div>
+              <div class="ss-title">Payment Confirmed</div>
+              <div class="ss-sub">Escrow funded. MazaoMove is dispatching a transporter. Farmer has been notified not to load produce until the driver shows the 4-digit code.</div>
+              <button class="ss-btn" onclick="closeSuccess('ss-payment')">Continue</button>
+            </div>
+
+            <div class="success-screen" id="ss-driver">
+              <div class="ss-circle">&#128663;</div>
+              <div class="ss-title">Job Accepted</div>
+              <div class="ss-sub">Route loaded. Navigate to Nakuru Farm. Show code 8342 on arrival. Payment releases when buyer confirms delivery.</div>
+              <button class="ss-btn" onclick="closeSuccess('ss-driver');showDriverTab('route',null)">View Route</button>
+            </div>
+
+            <!-- TRANSACTION FLOW SCREEN -->
+            <div class="fullview" id="fv-flow">
+              <div class="fv-head">
+                <button class="fv-back" onclick="closeFV('fv-flow')">&#8592;</button>
+                <div class="fv-title">How a Transaction Works</div>
+              </div>
+              <div class="fv-body" id="fv-flow-body"></div>
+            </div>
+
+          </div><!-- sp-screen -->
+        </div><!-- smartphone -->
+        <div style="font-size:10px;color:var(--muted);text-align:center;margin-top:6px;max-width:280px;line-height:1.5;">When the USSD farmer posts, the listing appears on the buyer app instantly. Same backend.</div>
+      </div>
+    </div>
+
+  </div><!-- split-wrap -->
+</div><!-- app -->
+
+<script>
+// ─── DATA ───────────────────────────────────────────────────
+const LISTINGS = [
+  {id:1,crop:'Tomatoes',   img:'https://images.unsplash.com/photo-1592924357228-91a4daadcfea?w=400&q=80', qty:300,sold:200,price:62, harv:'17 Mar 2026',trust:94,county:'Nakuru',  distKm:160,reviews:23,tags:['Good quantity','Fresh produce','Accurate description'],urgent:true },
+  {id:2,crop:'Tomatoes',   img:'https://images.unsplash.com/photo-1592924357228-91a4daadcfea?w=400&q=80', qty:500,sold:0,  price:58, harv:'18 Mar 2026',trust:87,county:'Kiambu',  distKm:15, reviews:11,tags:['Fresh produce','Honest pricing'],                        urgent:false},
+  {id:3,crop:'Onions',     img:'https://images.unsplash.com/photo-1587049352846-4a222e784d38?w=400&q=80', qty:400,sold:50, price:45, harv:'15 Mar 2026',trust:91,county:'Meru',    distKm:230,reviews:18,tags:['Good quantity','Accurate description'],                 urgent:false},
+  {id:4,crop:'Cabbage',    img:'https://images.unsplash.com/photo-1594282486552-05b4d80fbb9f?w=400&q=80', qty:180,sold:0,  price:35, harv:'18 Mar 2026',trust:88,county:'Nakuru',  distKm:160,reviews:7, tags:['Fresh produce'],                                         urgent:true },
+  {id:5,crop:'Kale',       img:'https://images.unsplash.com/photo-1576045057995-568f588f82fb?w=400&q=80', qty:250,sold:80, price:28, harv:'19 Mar 2026',trust:79,county:'Kiambu',  distKm:15, reviews:5, tags:['Good quantity'],                                         urgent:true },
+  {id:6,crop:'Avocado',    img:'https://images.unsplash.com/photo-1523049673857-eb18f1d7b578?w=400&q=80', qty:600,sold:100,price:85, harv:'16 Mar 2026',trust:96,county:'Muranga', distKm:95, reviews:31,tags:['Good quantity','Fresh produce','Accurate description'],    urgent:false},
+  {id:7,crop:'Capsicum',   img:'https://images.unsplash.com/photo-1563565375-f3fdfdbefa83?w=400&q=80', qty:150,sold:0,  price:120,harv:'19 Mar 2026',trust:85,county:'Nakuru',  distKm:160,reviews:8, tags:['Fresh produce','Accurate description'],                   urgent:false},
+  {id:8,crop:'Mango',      img:'https://images.unsplash.com/photo-1601493700631-2b16ec4b4716?w=400&q=80', qty:800,sold:200,price:40, harv:'17 Mar 2026',trust:92,county:'Kwale',   distKm:490,reviews:15,tags:['Good quantity','Fresh produce'],                         urgent:true },
+  {id:9,crop:'Passion Fruit',img:'https://images.unsplash.com/photo-1604495772376-9657b4b5f0e7?w=400&q=80',qty:200,sold:0,price:95, harv:'18 Mar 2026',trust:83,county:'Embu',    distKm:135,reviews:6, tags:['Accurate description'],                                  urgent:false},
+  {id:10,crop:'Bananas',   img:'https://images.unsplash.com/photo-1603833665858-e61d17a86224?w=400&q=80', qty:1000,sold:300,price:18,harv:'16 Mar 2026',trust:89,county:'Kisii',  distKm:310,reviews:22,tags:['Good quantity','Accurate description'],                 urgent:true },
+];
+
+const BUYER_TYPES = ['Hotel / Restaurant','School Canteen','Supermarket','Individual Household','Export Agent','Cooperative'];
+const RATE_KM = 10;
+const PLATFORM = 0.05;
+
+function tcost(km,q){return Math.round(km*RATE_KM*(q/500)*1.2+km*5);}
+
+// ─── STARS ──────────────────────────────────────────────────
+const STAR_MEANINGS = ['','Poor experience','Below expectations','Acceptable','Good, would buy again','Excellent, highly recommended'];
+const POS_FARMER = ['Good quantity','Fresh produce','Accurate description','Ready on time','Honest pricing'];
+const NEG_FARMER = ['Wrong quantity','Quality issues','Late notice','Misleading description'];
+const POS_DRIVER = ['On time','Careful handling','Professional','Good communication'];
+const NEG_DRIVER = ['Late arrival','Rough handling','Unprofessional','Poor communication'];
+
+function starSVG(f,s=12){const c=f?'#C9A84C':'#D0CCBF';return`<svg viewBox="0 0 20 20" width="${s}" height="${s}" style="display:inline-block;vertical-align:middle"><path fill="${c}" d="M10 1l2.4 7.4H20l-6.2 4.5 2.4 7.4L10 16l-6.2 4.3 2.4-7.4L0 8.4h7.6z"/></svg>`;}
+function starsHTML(n,s=11){return[1,2,3,4,5].map(i=>starSVG(i<=n,s)).join('');}
+
+// ─── STATE ──────────────────────────────────────────────────
+let appRole='farmer', buyQty=200, ownTransport=false;
+let activeFilter='All', s1=4, s2=4;
+let fpScreen='main';
+
+// ─── TYPEWRITER ─────────────────────────────────────────────
+const TW_WORDS=['Flow','Market','Move','Pay','Flow'];
+let twi=0,twc=0,twd=false;
+const twEl=document.getElementById('tw');
+function twStep(){const t=TW_WORDS[twi%TW_WORDS.length];if(!twd){twc++;twEl.textContent=t.slice(0,twc);if(twc===t.length){twd=true;setTimeout(twStep,1900);return;}}else{twc--;twEl.textContent=t.slice(0,twc);if(twc===0){twd=false;twi++;}}setTimeout(twStep,twd?55:88);}
+setTimeout(twStep,1200);
+
+// ─── USSD NETWORK ROTATOR ───────────────────────────────────
+const NETS=['Airtel','Safaricom','Equitel','Telkom'];let ni=0;
+setInterval(()=>{
+  document.querySelectorAll('.fp-net-badge').forEach((el,i)=>{el.classList.toggle('active',i===ni);});
+  const lbl=document.getElementById('fp-net-lbl');if(lbl)lbl.textContent=NETS[ni];
+  ni=(ni+1)%4;
+},2800);
+
+// ─── TOAST ──────────────────────────────────────────────────
+function toast(label,msg,dur=3200){
+  const t=document.getElementById('toast');
+  document.getElementById('toast-lbl').textContent=label;
+  document.getElementById('toast-msg').textContent=msg;
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),dur);
+}
+
+// ─── NAV ────────────────────────────────────────────────────
+function goSI(){document.getElementById('landing').style.display='none';const s=document.getElementById('signin');s.style.display='flex';}
+function pickR(el,r){document.querySelectorAll('.role-opt').forEach(o=>o.classList.remove('sel'));el.classList.add('sel');appRole=r;}
+function doSI(){document.getElementById('signin').style.display='none';document.getElementById('app').style.display='block';initApp();}
+
+function initApp(){
+  initFP();
+  renderFarmerTab('home');
+  renderBuyerTab('home');
+  renderDriverTab('home');
+  switchAppRole(appRole);
+}
+
+function cycleRole(){const rs=['farmer','buyer','driver'];switchAppRole(rs[(rs.indexOf(appRole)+1)%3]);}
+
+const ROLE_INFO={
+  farmer:{label:'Farmer',   initials:'JW',name:'Jane Wanjiku', trust:'94%'},
+  buyer: {label:'Buyer',    initials:'DK',name:'David Kamau',  trust:'88%'},
+  driver:{label:'Transporter',initials:'PM',name:'Peter Maina',trust:'91%'},
+};
+
+function switchAppRole(r){
+  appRole=r;
+  const d=ROLE_INFO[r];
+  document.getElementById('tb-role').textContent=d.label;
+  document.getElementById('tb-av').textContent=d.initials;
+  document.getElementById('sp-name').textContent=d.name;
+  document.getElementById('sp-trust').textContent='Trust '+d.trust;
+  ['farmer','buyer','driver'].forEach(role=>{
+    document.getElementById('sc-'+role).classList.toggle('active',role===r);
+    document.getElementById('rt-'+role).classList.toggle('active',role===r);
+  });
+}
+
+// ─── FARMER ─────────────────────────────────────────────────
+function showFarmerTab(tab,btn){
+  document.querySelectorAll('#nav-farmer .nav-item').forEach(b=>b.classList.remove('active'));
+  if(btn)btn.classList.add('active');
+  renderFarmerTab(tab);
+}
+
+function renderFarmerTab(tab){
+  const b=document.getElementById('body-farmer');
+  if(tab==='home')b.innerHTML=farmerHome();
+  else if(tab==='post')b.innerHTML=farmerPost();
+  else if(tab==='receipts')b.innerHTML=farmerReceipts();
+  setTimeout(()=>updateProfit(62),50);
+}
+
+function farmerHome(){return`
+  <div class="sec-hd">Overview</div>
+  <div class="stat-grid">
+    <div class="stat g"><div class="stat-n">23</div><div class="stat-l">Receipts. Credit eligible.</div></div>
+    <div class="stat gr"><div class="stat-n" style="color:var(--lg)">94%</div><div class="stat-l">MazaoTrust score</div></div>
+    <div class="stat g"><div class="stat-n">2</div><div class="stat-l">Live listings</div></div>
+  </div>
+  <div class="info">Harvest date shown on listings. Buyers see how recently produce was harvested to judge freshness themselves.</div>
+  <div class="sec-hd">Active Listings</div>
+  ${farmerListCard(LISTINGS[0])}
+  ${farmerListCard(LISTINGS[2])}
+`;}
+
+function farmerListCard(l){return`
+  <div class="card">
+    <img class="produce-img" src="${l.img}" alt="${l.crop}" loading="lazy" onerror="this.style.display='none'">
+    <div class="card-head">
+      <span class="card-title">${l.crop}, ${l.qty-l.sold}kg available</span>
+      <span class="badge ${l.urgent?'red':'green'}">${l.urgent?'Urgent':'Live'}</span>
+    </div>
+    <div class="card-body">
+      <div class="row"><span class="rk">Harvested</span><span class="rv">${l.harv}</span></div>
+      <div class="row"><span class="rk">Your price</span><span class="rv gold">KES ${l.price}/kg</span></div>
+      <div class="row"><span class="rk">County</span><span class="rv">${l.county}</span></div>
+      <div class="row"><span class="rk">MazaoTrust</span><span class="rv">${starsHTML(Math.round(l.trust/20))} ${l.trust}% (${l.reviews})</span></div>
+      <div class="tags">${l.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div>
+    </div>
+  </div>`;}
+
+function farmerPost(){return`
+  <div class="form-wrap">
+    <label class="flbl">Crop type</label>
+    <select class="fsel"><option>Tomatoes</option><option>Onions</option><option>Cabbage</option><option>Capsicum</option><option>Kale (Sukuma Wiki)</option><option>Carrots</option><option>Avocado</option><option>Mango</option><option>Bananas</option><option>Passion Fruit</option></select>
+    <label class="flbl">Quantity (kg)</label>
+    <input class="finp" type="number" value="500" id="p-qty" oninput="checkFloor()">
+    <label class="flbl">Price per kg (KES)</label>
+    <input class="finp" type="number" value="62" id="p-price" oninput="checkFloor()">
+    <div class="floor-ok" id="f-ok">County floor: KES 52/kg (KACE today). Your price is above the floor.</div>
+    <div class="floor-warn" id="f-warn">Below county floor of KES 52/kg. You can still list, but consider adjusting.</div>
+    <label class="flbl">Harvest date</label>
+    <input class="finp" type="date" value="2026-03-19">
+    <label class="flbl">County (type first 3 letters)</label>
+    <input class="finp" type="text" value="Nakuru" placeholder="e.g. NAK for Nakuru">
+    <label class="flbl">GPS pin (drag to your farm)</label>
+    <div class="map-widget">
+      <div class="map-bg"></div>
+      <div class="map-road h"></div><div class="map-road v"></div>
+      <div class="map-pin farm" id="farm-pin" style="cursor:grab;"></div>
+      <div class="map-label" style="left:28%;top:5%;font-size:7px;">Nakuru</div>
+      <div class="map-label" style="right:5%;bottom:5%;font-size:7px;">Tap to move pin</div>
+    </div>
+    <div style="font-size:9px;color:var(--muted);margin-bottom:6px;">USSD users register county name only. App users set exact GPS pin so buyers and transporters navigate directly to your farm.</div>
+    <button class="abtn gold" onclick="postProduce()">Post to MazaoMarket</button>
+  </div>
+  <div class="pcalc">
+    <div class="pc-hd">Profit Projection Engine</div>
+    <div class="pc-row"><span class="pk">Market price</span><span class="pv" id="pp-m">KES 62/kg</span></div>
+    <div class="pc-row"><span class="pk">Transport (est. 160km)</span><span class="pv" id="pp-t">- KES 20/kg</span></div>
+    <div class="pc-row"><span class="pk">Platform fee (5%)</span><span class="pv" id="pp-f">- KES 3/kg</span></div>
+    <div class="pc-row tot"><span class="pk">Net to farmer</span><span class="pv" id="pp-n">= KES 39/kg</span></div>
+    <div class="pc-sl">
+      <label>Adjust price</label>
+      <input type="range" min="20" max="150" value="62" oninput="updateProfit(this.value)">
+      <label id="pp-lbl" style="min-width:46px;">KES 62</label>
+    </div>
+  </div>`;}
+
+function postProduce(){
+  toast('MazaoMarket','Listing posted. 2 buyers notified in Nakuru county.');
+  setTimeout(()=>toast('MazaoMove','Transporter dispatch ready once escrow is funded.'),3500);
+}
+function checkFloor(){
+  const p=parseFloat(document.getElementById('p-price')?.value||62);
+  const ok=document.getElementById('f-ok'),warn=document.getElementById('f-warn');
+  if(ok)ok.style.display=p>=52?'block':'none';
+  if(warn)warn.style.display=p<52?'block':'none';
+}
+function updateProfit(price){
+  price=parseInt(price);
+  const t=Math.round(price*.32),f=Math.round(price*.05),n=price-t-f;
+  const m=document.getElementById('pp-m');if(m)m.textContent='KES '+price+'/kg';
+  const pt=document.getElementById('pp-t');if(pt)pt.textContent='- KES '+t+'/kg';
+  const pf=document.getElementById('pp-f');if(pf)pf.textContent='- KES '+f+'/kg';
+  const pn=document.getElementById('pp-n');if(pn)pn.textContent='= KES '+n+'/kg';
+  const pl=document.getElementById('pp-lbl');if(pl)pl.textContent='KES '+price;
+}
+
+function farmerReceipts(){return`
+  <div class="sms-notif">SMS: MazaoFlow receipt #23. Tomatoes 200kg. Net: KES 7,980. Trust score updated to 94% (+1). Issued 19 Mar 2026 14:32.</div>
+  <div class="info">USSD farmers receive every receipt and trust update via SMS. No smartphone needed to build a credit history.</div>
+  <div class="receipt">
+    <div class="rc-head"><div class="rt">MazaoReceipt</div><div class="rs">Cryptographically signed. Legally traceable.</div></div>
+    <div class="rc-body">
+      <div class="rc-row"><span class="rck">Receipt</span><span class="rcv">#MZF-2026-0023</span></div>
+      <div class="rc-row"><span class="rck">Farmer</span><span class="rcv">Jane Wanjiku</span></div>
+      <div class="rc-row"><span class="rck">National ID</span><span class="rcv">*****8821</span></div>
+      <div class="rc-row"><span class="rck">Crop</span><span class="rcv">Tomatoes, 200 kg</span></div>
+      <div class="rc-row"><span class="rck">Harvested</span><span class="rcv">17 Mar 2026</span></div>
+      <div class="rc-row"><span class="rck">Buyer</span><span class="rcv">Hotel Sarova (verified)</span></div>
+      <div class="rc-row"><span class="rck">Gross</span><span class="rcv">KES 12,400</span></div>
+      <div class="rc-row"><span class="rck">Transport</span><span class="rcv">KES 3,200</span></div>
+      <div class="rc-row"><span class="rck">Platform (5%)</span><span class="rcv">KES 620</span></div>
+      <div class="rc-row" style="padding-top:6px;"><span class="rck" style="font-weight:700;color:var(--text);">Net to farmer</span><span class="rcv" style="color:var(--gold);font-size:13px;font-weight:700;">KES 8,580</span></div>
+      <div class="rc-row"><span class="rck">Transaction date</span><span class="rcv">19 Mar 2026, 14:32</span></div>
+      <div class="rc-row"><span class="rck">Trust update</span><span class="rcv" style="color:var(--lg)">94% (+1)</span></div>
+    </div>
+    <div class="rc-foot"><p>Delivery confirmed. 4-digit code verified.</p><div class="hash">SIG: a3f9b2c1e8d47f91b2c3...MazaoFlow KYC chain</div></div>
+  </div>
+  <div class="info" style="margin-top:6px;">23 receipts completed. Present this history to any microfinance institution to apply for credit. Minimum required: 10 receipts.</div>`;}
+
+// ─── BUYER ──────────────────────────────────────────────────
+function showBuyerTab(tab,btn){
+  document.querySelectorAll('#nav-buyer .nav-item').forEach(b=>b.classList.remove('active'));
+  if(btn)btn.classList.add('active');
+  renderBuyerTab(tab);
+}
+
+function renderBuyerTab(tab){
+  const b=document.getElementById('body-buyer');
+  if(tab==='home')b.innerHTML=buyerHome();
+  else if(tab==='market')b.innerHTML=buyerMarket();
+  else if(tab==='orders')b.innerHTML=buyerOrders();
+  else if(tab==='review')b.innerHTML=reviewPage();
+}
+
+function buyerHome(){return`
+  <div class="sec-hd">Overview</div>
+  <div class="stat-grid">
+    <div class="stat g"><div class="stat-n">7</div><div class="stat-l">Orders completed</div></div>
+    <div class="stat g"><div class="stat-n" style="font-size:16px;">84K</div><div class="stat-l">Total spent (KES)</div></div>
+    <div class="stat gr"><div class="stat-n">3</div><div class="stat-l">New matches today</div></div>
+  </div>
+  <div class="info">Buying directly through MazaoFlow removes the broker markup. You pay farm price plus a 5% platform fee and transport. No middleman.</div>
+  <div class="sec-hd">Your buyer profile</div>
+  <div class="profile-head">
+    <div class="avatar corp">DK</div>
+    <div class="profile-info">
+      <div class="profile-name">David Kamau</div>
+      <div class="profile-type">Hotel / Restaurant</div>
+      <div class="profile-trust">${starsHTML(4,10)}<span style="font-size:10px;color:var(--muted);">88% trust score</span></div>
+    </div>
+  </div>
+  <div class="sec-hd">Top Match Today</div>
+  ${buyerCardSmall(LISTINGS[5])}
+`;}
+
+function buyerCardSmall(l){return`
+  <div class="card" onclick="openListing(${l.id})">
+    <img class="produce-img" src="${l.img}" alt="${l.crop}" loading="lazy" onerror="this.style.display='none'">
+    <div class="card-head">
+      <span class="card-title">${l.crop}, ${l.qty-l.sold}kg available</span>
+      <span class="badge ${l.urgent?'red':'green'}">${l.urgent?'Urgent':'Fresh'}</span>
+    </div>
+    <div class="card-body">
+      <div class="row"><span class="rk">Farm price</span><span class="rv gold">KES ${l.price}/kg</span></div>
+      <div class="row"><span class="rk">Harvested</span><span class="rv">${l.harv}</span></div>
+      <div class="row"><span class="rk">Farmer trust</span><span class="rv">${starsHTML(Math.round(l.trust/20))} ${l.trust}%</span></div>
+      <div class="row"><span class="rk">Distance</span><span class="rv">${l.distKm} km</span></div>
+      <div class="tags">${l.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div>
+      <button class="abtn" onclick="event.stopPropagation();openListing(${l.id})" style="margin-top:8px;">View full details</button>
+    </div>
+  </div>`;}
+
+function buyerMarket(){
+  const filters=['All','Tomatoes','Onions','Cabbage','Kale','Avocado','Capsicum','Mango','Bananas','Passion Fruit'];
+  const sorted=[...LISTINGS]
+    .filter(l=>activeFilter==='All'||l.crop===activeFilter)
+    .sort((a,b)=>daysSince(b.harv)-daysSince(a.harv));
+  return`
+    <div class="filter-bar">${filters.map(f=>`<button class="fbtn ${f===activeFilter?'active':''}" onclick="setFilter('${f}')">${f}</button>`).join('')}</div>
+    <div style="background:var(--cream);border-left:3px solid var(--gold);border-radius:0 8px 8px 0;padding:9px 12px;font-size:10px;color:var(--text);margin-bottom:10px;line-height:1.6;">
+      <strong>How matching works:</strong> These listings are shown to you because they match your purchase history and location. New listings appear at the top. A USSD farmer who posts right now appears here instantly. Badge colour shows how recently produce was harvested. Red means it needs to move today. Gold means 2 to 3 days old. Green means just harvested.
+    </div>
+    <button class="abtn" style="margin-bottom:10px;background:var(--mg);" onclick="openFlowScreen()">See how a transaction works end to end</button>
+    ${sorted.map(l=>marketCard(l)).join('')}`;}
+
+function daysSince(dateStr){
+  const d=new Date(dateStr),now=new Date('2026-03-21');
+  return Math.round((now-d)/(1000*60*60*24));
+}
+
+function setFilter(f){activeFilter=f;renderBuyerTab('market');}
+
+function marketCard(l){
+  const days=daysSince(l.harv);
+  const urgentLabel = days>=4 ? 'Move fast, '+days+'d old' : days>=2 ? days+'d since harvest' : 'Just harvested';
+  const badgeClass = days>=4?'red':days>=2?'gold':'green';
+  const cropColors = {'Tomatoes':'#c0392b','Onions':'#c17f24','Cabbage':'#27ae60','Kale':'#1a6b3a','Avocado':'#2d6a1f','Capsicum':'#e74c3c','Mango':'#e67e22','Bananas':'#f1c40f','Passion Fruit':'#8e44ad','Bananas':'#f39c12'};
+  const bg = cropColors[l.crop]||'#2D5A3D';
+  return`<div class="card" onclick="openListing(${l.id})">
+    <div style="position:relative;width:100%;height:90px;overflow:hidden;">
+      <div style="position:absolute;inset:0;background:${bg};display:flex;align-items:center;justify-content:center;">
+        <span style="font-size:11px;font-weight:600;color:rgba(255,255,255,.5);letter-spacing:.5px;text-transform:uppercase;">${l.crop}</span>
+      </div>
+      <img style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;" src="${l.img}" alt="${l.crop}" loading="lazy" onerror="this.style.display='none'">
+    </div>
+    <div class="card-head">
+      <span class="card-title">${l.crop}, ${l.qty-l.sold}kg, ${l.county}</span>
+      <span class="badge ${badgeClass}" title="${days>=4?'Harvest was '+days+' days ago. Needs to move.':days>=2?'Harvested '+days+' days ago':'Harvested today or yesterday'}">${urgentLabel}</span>
+    </div>
+    <div class="card-body">
+      <div class="row"><span class="rk">Farm price</span><span class="rv gold">KES ${l.price}/kg</span></div>
+      <div class="row"><span class="rk">Farmer trust</span><span class="rv">${starsHTML(Math.round(l.trust/20))} ${l.trust}%</span></div>
+      <div class="row"><span class="rk">Distance</span><span class="rv">${l.distKm} km from Nairobi</span></div>
+      <div class="tags">${l.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div>
+    </div>
+  </div>`;}
+
+function openListing(id){
+  const l=LISTINGS.find(x=>x.id===id);
+  document.getElementById('fv-listing-title').textContent=l.crop+' from '+l.county;
+  document.getElementById('fv-listing-body').innerHTML=listingDetail(l);
+  document.getElementById('fv-listing').classList.add('open');
+  setTimeout(()=>updateCost(l),50);
+}
+
+function listingDetail(l){
+  const produce=buyQty*l.price;
+  const tc=ownTransport?0:tcost(l.distKm,buyQty);
+  const pf=Math.round(produce*PLATFORM);
+  const total=produce+tc+pf;
+  const broker=Math.round(produce*1.5);
+  return`
+    <img src="${l.img}" alt="${l.crop}" style="width:100%;height:140px;object-fit:cover;border-radius:10px;margin-bottom:12px;" loading="lazy" onerror="this.style.display='none'">
+    <div class="profile-head" style="margin-bottom:10px;">
+      <div class="avatar">JW</div>
+      <div class="profile-info">
+        <div class="profile-name">Jane Wanjiku</div>
+        <div class="profile-type">Verified Farmer, ${l.county} County</div>
+        <div class="profile-trust">${starsHTML(Math.round(l.trust/20),10)}<span style="font-size:10px;color:var(--muted);">${l.trust}% (${l.reviews} reviews)</span></div>
+      </div>
+    </div>
+    <div class="map-widget">
+      <div class="map-bg"></div>
+      <div class="map-road h"></div><div class="map-road v"></div>
+      <div class="map-pin farm"></div>
+      <div class="map-pin dest"></div>
+      <div class="map-route"></div>
+      <div class="map-label" style="left:22%;top:8%;font-size:7px;">${l.county} Farm</div>
+      <div class="map-label" style="right:8%;bottom:8%;font-size:7px;">Your location</div>
+      <div class="map-label" style="top:50%;left:45%;font-size:7px;color:var(--gold);">${l.distKm}km</div>
+    </div>
+    <div class="card" style="margin-bottom:10px;">
+      <div class="card-body">
+        <div class="row"><span class="rk">Crop</span><span class="rv">${l.crop}</span></div>
+        <div class="row"><span class="rk">Available</span><span class="rv">${l.qty-l.sold} kg (${l.sold > 0 ? l.sold+'kg already sold via partial orders' : 'full stock available'})</span></div>
+        <div class="row"><span class="rk">Farm price</span><span class="rv gold">KES ${l.price}/kg</span></div>
+        <div class="row"><span class="rk">Harvested</span><span class="rv">${l.harv}</span></div>
+        <div class="row"><span class="rk">County</span><span class="rv">${l.county} (GPS pin set)</span></div>
+        <div class="tags">${l.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div>
+      </div>
+    </div>
+    <div class="sec-hd">Recent Reviews</div>
+    <div class="card" style="margin-bottom:10px;">
+      <div class="card-body">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+          <div class="avatar" style="width:28px;height:28px;font-size:10px;">HK</div>
+          <div><div style="font-size:11px;font-weight:500;">Hotel Sarova</div><div style="font-size:9px;color:var(--muted);">Hotel / Restaurant</div></div>
+          <div style="margin-left:auto">${starsHTML(5,10)}</div>
+        </div>
+        <div class="tags"><span class="tag">Good quantity</span><span class="tag">Fresh produce</span><span class="tag">Ready on time</span></div>
+      </div>
+    </div>
+    <div class="sec-hd">Select Quantity (partial orders allowed)</div>
+    <div class="qty-ctrl">
+      <button class="qty-btn" onclick="chQty(-50,${l.id})">-</button>
+      <div class="qty-val" id="qd-${l.id}">${buyQty} kg</div>
+      <button class="qty-btn" onclick="chQty(50,${l.id})">+</button>
+    </div>
+    <div class="cost-table" id="ct-${l.id}">
+      <div class="ct-title">Full Cost Breakdown vs Broker</div>
+      <div class="ct-row"><span class="ck">Produce (${buyQty}kg x KES ${l.price})</span><span class="cv" id="c-produce-${l.id}">KES ${produce.toLocaleString()}</span></div>
+      <div class="ct-row"><span class="ck">Transport (${l.distKm}km at KES ${RATE_KM}/km)</span><span class="cv" id="c-transport-${l.id}">KES ${tc.toLocaleString()}</span></div>
+      <div class="ct-row"><span class="ck">Platform fee (5%)</span><span class="cv" id="c-fee-${l.id}">KES ${pf.toLocaleString()}</span></div>
+      <div class="ct-row"><span class="ck">Total via MazaoFlow</span><span class="cv gold" id="c-total-${l.id}">KES ${total.toLocaleString()}</span></div>
+      <div class="ct-row"><span class="ck">Via broker (est. 50% markup)</span><span class="cv strike">KES ${broker.toLocaleString()}</span></div>
+      <div class="ct-row"><span class="ck save">You save</span><span class="cv gold">KES ${(broker-total).toLocaleString()}</span></div>
+      <div class="t-toggle">
+        <span class="t-toggle-lbl">I have my own transport (skip MazaoMove)</span>
+        <label class="tswitch">
+          <input type="checkbox" id="tt-${l.id}" onchange="toggleTransport(this.checked,${l.id})" ${ownTransport?'checked':''}>
+          <div class="ttrack"></div>
+          <div class="tthumb"></div>
+        </label>
+      </div>
+    </div>
+    <button class="abtn gold" onclick="openPayment(${l.id})" style="margin-top:8px;">Pay KES ${total.toLocaleString()} via M-Pesa</button>
+    <button class="abtn outline" onclick="closeFV('fv-listing')" style="margin-top:6px;">Back to Market</button>`;}
+
+function chQty(d,lid){
+  buyQty=Math.max(50,Math.min(500,buyQty+d));
+  const l=LISTINGS.find(x=>x.id===lid);
+  const qd=document.getElementById('qd-'+lid);if(qd)qd.textContent=buyQty+' kg';
+  updateCostDisplay(l);
+}
+
+function toggleTransport(v,lid){
+  ownTransport=v;
+  const l=LISTINGS.find(x=>x.id===lid);
+  updateCostDisplay(l);
+}
+
+function updateCost(l){updateCostDisplay(l);}
+
+function updateCostDisplay(l){
+  if(!l)return;
+  const produce=buyQty*l.price;
+  const tc=ownTransport?0:tcost(l.distKm,buyQty);
+  const pf=Math.round(produce*PLATFORM);
+  const total=produce+tc+pf;
+  const broker=Math.round(produce*1.5);
+  const cp=document.getElementById('c-produce-'+l.id);if(cp)cp.textContent='KES '+produce.toLocaleString();
+  const ct=document.getElementById('c-transport-'+l.id);if(ct)ct.textContent='KES '+(ownTransport?'0 (own transport)':tc.toLocaleString());
+  const cf=document.getElementById('c-fee-'+l.id);if(cf)cf.textContent='KES '+pf.toLocaleString();
+  const ctot=document.getElementById('c-total-'+l.id);if(ctot)ctot.textContent='KES '+total.toLocaleString();
+  const pbtn=document.querySelector('.abtn.gold');if(pbtn&&pbtn.textContent.startsWith('Pay'))pbtn.textContent='Pay KES '+total.toLocaleString()+' via M-Pesa';
+}
+
+function openPayment(lid){
+  const l=LISTINGS.find(x=>x.id===lid);
+  const produce=buyQty*l.price;
+  const tc=ownTransport?0:tcost(l.distKm,buyQty);
+  const pf=Math.round(produce*PLATFORM);
+  const total=produce+tc+pf;
+  const broker=Math.round(produce*1.5);
+  document.getElementById('fv-payment-body').innerHTML=`
+    <div style="text-align:center;padding:16px 0 8px;">
+      <div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;">M-Pesa STK Push</div>
+      <div style="font-family:'Playfair Display',serif;font-size:32px;font-weight:700;color:var(--text);">KES ${total.toLocaleString()}</div>
+      <div style="font-size:11px;color:var(--muted);margin-top:4px;">${buyQty}kg ${l.crop} from ${l.county}</div>
+    </div>
+    <div class="cost-table" style="margin-bottom:12px;">
+      <div class="ct-title">Payment Breakdown</div>
+      <div class="ct-row"><span class="ck">Produce (${buyQty}kg x KES ${l.price})</span><span class="cv">KES ${produce.toLocaleString()}</span></div>
+      <div class="ct-row"><span class="ck">Transport (${l.distKm}km)</span><span class="cv">KES ${ownTransport?'0 (own)':tc.toLocaleString()}</span></div>
+      <div class="ct-row"><span class="ck">Platform fee (5%)</span><span class="cv">KES ${pf.toLocaleString()}</span></div>
+      <div class="ct-row"><span class="ck">Total to pay</span><span class="cv gold">KES ${total.toLocaleString()}</span></div>
+      <div class="ct-row"><span class="ck">Broker equivalent</span><span class="cv strike">KES ${broker.toLocaleString()}</span></div>
+      <div class="ct-row"><span class="ck save">You save</span><span class="cv gold">KES ${(broker-total).toLocaleString()}</span></div>
+    </div>
+    <div class="info">Funds held in escrow until delivery is confirmed with a 4-digit code. 5-minute database lock is now active. No other buyer can claim this listing.</div>
+    <div style="background:var(--off);border-radius:10px;padding:12px;margin-bottom:12px;font-size:11px;color:var(--muted);line-height:1.6;text-align:center;">An STK Push has been sent to +254 712 345 678.<br>Enter your M-Pesa PIN on your phone to confirm.</div>
+    <button class="abtn gold" onclick="confirmPayment(${lid})">Confirm M-Pesa PIN</button>
+    <button class="abtn outline" onclick="closeFV('fv-payment')" style="margin-top:6px;">Cancel</button>`;
+  closeFV('fv-listing');
+  document.getElementById('fv-payment').classList.add('open');
+}
+
+function confirmPayment(lid){
+  closeFV('fv-payment');
+  document.getElementById('ss-payment').classList.add('open');
+  setTimeout(()=>toast('MazaoMove','Transporter dispatched. ETA: 2h 20min.'),1200);
+  setTimeout(()=>toast('Farmer Notified','Jane Wanjiku: DO NOT LOAD. Wait for 4-digit code.'),4000);
+}
+
+function buyerOrders(){return`
+  <div class="info">Completed orders show full cost vs broker comparison. Your savings to date: KES 18,200.</div>
+  <div class="card">
+    <div class="card-head"><span class="card-title">Tomatoes, 200kg from Nakuru</span><span class="badge green">Delivered</span></div>
+    <div class="card-body">
+      <div class="row"><span class="rk">Produce</span><span class="rv">KES 12,400</span></div>
+      <div class="row"><span class="rk">Transport (160km)</span><span class="rv">KES 3,200</span></div>
+      <div class="row"><span class="rk">Platform (5%)</span><span class="rv">KES 620</span></div>
+      <div class="row"><span class="rk">Total paid</span><span class="rv gold">KES 16,220</span></div>
+      <div class="row"><span class="rk">Broker equivalent</span><span class="rv red" style="text-decoration:line-through;">KES 18,600</span></div>
+      <div class="row"><span class="rk">Saved</span><span class="rv green">KES 2,380</span></div>
+      <div class="row"><span class="rk">Driver</span><span class="rv">Peter Maina, KCA 456B</span></div>
+      <div class="row"><span class="rk">Status</span><span class="rv green">Funds released on 4-digit code</span></div>
+      <button class="abtn outline" onclick="showBuyerTab('review',null);document.querySelectorAll('#nav-buyer .nav-item')[3].classList.add('active')">Rate this transaction</button>
+    </div>
+  </div>`;}
+
+// ─── REVIEW ─────────────────────────────────────────────────
+function reviewPage(){return`
+  <div class="info">Your ratings build the MazaoTrust score shown on listing cards. USSD farmers receive trust updates via SMS.</div>
+  <div class="rv-card">
+    <div class="rv-title">Rate Farmer: Jane Wanjiku</div>
+    <div class="rv-sub">Tomatoes, 200kg, 19 Mar 2026</div>
+    <div class="star-row" id="sf">${buildStars('f',s1)}</div>
+    <div class="star-meaning" id="sm-f">${STAR_MEANINGS[s1]}</div>
+    <div class="rtags" id="rt-f-pos">${POS_FARMER.map(t=>`<span class="rtag" onclick="this.classList.toggle('sel')">${t}</span>`).join('')}</div>
+    <div class="rtags" id="rt-f-neg" style="display:${s1<=2?'flex':'none'}">${NEG_FARMER.map(t=>`<span class="rtag neg" onclick="this.classList.toggle('sel')">${t}</span>`).join('')}</div>
+  </div>
+  <div class="rv-card">
+    <div class="rv-title">Rate Transporter: Peter Maina</div>
+    <div class="rv-sub">Vehicle: Pickup, KCA 456B</div>
+    <div class="star-row" id="sd">${buildStars('d',s2)}</div>
+    <div class="star-meaning" id="sm-d">${STAR_MEANINGS[s2]}</div>
+    <div class="rtags" id="rt-d-pos">${POS_DRIVER.map(t=>`<span class="rtag" onclick="this.classList.toggle('sel')">${t}</span>`).join('')}</div>
+    <div class="rtags" id="rt-d-neg" style="display:${s2<=2?'flex':'none'}">${NEG_DRIVER.map(t=>`<span class="rtag neg" onclick="this.classList.toggle('sel')">${t}</span>`).join('')}</div>
+  </div>
+  <button class="abtn gold" onclick="submitReview()">Submit Review</button>`;}
+
+function buildStars(who,n){
+  return[1,2,3,4,5].map(i=>`<button class="star-btn" onclick="setStar('${who}',${i})">${starSVG(i<=n,22)}</button>`).join('');
+}
+function setStar(who,n){
+  if(who==='f')s1=n; else s2=n;
+  const sr=document.getElementById('s'+who);if(sr)sr.innerHTML=buildStars(who,n);
+  const sm=document.getElementById('sm-'+who);if(sm)sm.textContent=STAR_MEANINGS[n];
+  const pos=document.getElementById('rt-'+who+'-pos');if(pos)pos.style.display=n>=3?'flex':'none';
+  const neg=document.getElementById('rt-'+who+'-neg');if(neg)neg.style.display=n<=2?'flex':'none';
+}
+function submitReview(){
+  toast('Review Submitted','Trust scores updated. Jane Wanjiku notified via SMS.');
+}
+
+// ─── DRIVER ─────────────────────────────────────────────────
+function showDriverTab(tab,btn){
+  if(btn){document.querySelectorAll('#nav-driver .nav-item').forEach(b=>b.classList.remove('active'));btn.classList.add('active');}
+  renderDriverTab(tab);
+}
+
+function renderDriverTab(tab){
+  const b=document.getElementById('body-driver');
+  if(tab==='home')b.innerHTML=driverHome();
+  else if(tab==='jobs')b.innerHTML=driverJobs();
+  else if(tab==='route')b.innerHTML=driverRoute();
+  else if(tab==='earn')b.innerHTML=driverEarn();
+}
+
+function driverHome(){return`
+  <div class="stat-grid">
+    <div class="stat g"><div class="stat-n">18</div><div class="stat-l">Trips completed</div></div>
+    <div class="stat g"><div class="stat-n" style="font-size:16px">27K</div><div class="stat-l">Earned (KES)</div></div>
+    <div class="stat gr"><div class="stat-n" style="color:var(--lg)">91%</div><div class="stat-l">MazaoTrust</div></div>
+  </div>
+  <div class="vehicle-card">
+    <div class="vc-title">My Vehicle</div>
+    <div class="row"><span class="rk">Type</span><span class="rv">Pickup Truck</span></div>
+    <div class="row"><span class="rk">Number Plate</span><span class="rv" style="font-family:'DM Mono',monospace;font-weight:600;">KCA 456B</span></div>
+    <div class="row"><span class="rk">Capacity</span><span class="rv">1,500 kg</span></div>
+    <div class="row"><span class="rk">Registered Routes</span><span class="rv">Nakuru, Kiambu, Muranga</span></div>
+  </div>
+  <div class="info">New job request received via Firebase push. 10-minute acceptance window. Platform paid your notification cost.</div>
+  ${driverJobCard(LISTINGS[0],true)}`;}
+
+function driverJobs(){return`
+  ${driverJobCard(LISTINGS[0],true)}
+  ${driverJobCard(LISTINGS[2],false)}`;}
+
+function driverJobCard(l,showBtn){
+  const tc=tcost(l.distKm,200);
+  const earn=Math.round(tc*0.95);
+  return`<div class="job-card">
+    <div class="jc-head"><span class="jt">${l.crop}, 200kg</span><span class="badge ${showBtn?'gold':'grey'}">${showBtn?'New Job':'Pending'}</span></div>
+    <div class="jc-body">
+      <div class="map-widget">
+        <div class="map-bg"></div><div class="map-road h"></div><div class="map-road v"></div>
+        <div class="map-pin farm"></div><div class="map-pin dest"></div><div class="map-route"></div>
+        <div class="map-label" style="left:22%;top:8%;font-size:7px;">${l.county} Farm (GPS)</div>
+        <div class="map-label" style="right:8%;bottom:8%;font-size:7px;">Delivery</div>
+        <div class="map-label" style="top:50%;left:44%;font-size:7px;color:var(--gold);">${l.distKm}km</div>
+      </div>
+      <div class="row"><span class="rk">Pickup</span><span class="rv">${l.county} Farm (GPS pinned by farmer)</span></div>
+      <div class="row"><span class="rk">Delivery</span><span class="rv">Nairobi CBD</span></div>
+      <div class="row"><span class="rk">Distance</span><span class="rv">${l.distKm} km</span></div>
+      <div class="row"><span class="rk">Platform rate</span><span class="rv">KES ${RATE_KM}/km (bulk agricultural)</span></div>
+      <div class="row"><span class="rk">Payment</span><span class="rv">Escrow. Released on 4-digit code at delivery.</span></div>
+      <div class="earn-bar"><span class="el">Your commission (95% of transport)</span><span class="ev">KES ${earn.toLocaleString()}</span></div>
+      ${showBtn?`<button class="abtn gold" onclick="acceptJob()">Accept Job, KES ${earn.toLocaleString()} on delivery</button>`:''}
+    </div>
+  </div>`;}
+
+function acceptJob(){
+  document.getElementById('ss-driver').classList.add('open');
+  toast('Job Accepted','Route loaded. Navigate to Nakuru Farm.');
+}
+
+function driverRoute(){return`
+  <div class="info">Show the 4-digit code to the farmer on arrival. Funds release only after the buyer confirms delivery using this same code.</div>
+  <div class="card">
+    <div class="card-head"><span class="card-title">Tomatoes, 200kg, Nakuru to Nairobi</span><span class="badge green">En Route</span></div>
+    <div class="card-body">
+      <div class="map-widget" style="height:100px;">
+        <div class="map-bg"></div><div class="map-road h"></div><div class="map-road v"></div>
+        <div class="map-pin farm"></div><div class="map-pin dest"></div><div class="map-route"></div>
+        <div class="map-label" style="left:22%;top:8%;font-size:7px;">Nakuru Farm</div>
+        <div class="map-label" style="right:8%;bottom:8%;font-size:7px;">Nairobi CBD</div>
+        <div class="map-label" style="top:48%;left:40%;font-size:7px;color:var(--gold);">160km, 2h20m</div>
+      </div>
+      <div class="row"><span class="rk">Pickup</span><span class="rv">Nakuru Farm (GPS pinned)</span></div>
+      <div class="row"><span class="rk">Delivery</span><span class="rv">Nairobi CBD</span></div>
+      <div class="row"><span class="rk">ETA</span><span class="rv">2 hours 20 minutes</span></div>
+      <div class="row"><span class="rk">Vehicle</span><span class="rv" style="font-family:'DM Mono',monospace">KCA 456B, Pickup</span></div>
+      <div class="row" style="padding-top:6px;"><span class="rk" style="font-weight:600;">4-digit release code</span><span class="rv" style="font-family:'DM Mono',monospace;font-size:18px;letter-spacing:4px;color:var(--gold);">8342</span></div>
+      <div class="row"><span class="rk">Your earnings</span><span class="rv gold">KES 3,040 (on delivery)</span></div>
+    </div>
+  </div>
+  <div class="info">Show code 8342 to the farmer on arrival. Do not share it in advance. The code is what unlocks your M-Pesa payment.</div>`;}
+
+function driverEarn(){return`
+  <div class="stat-grid">
+    <div class="stat g"><div class="stat-n" style="font-size:16px">27K</div><div class="stat-l">Total earned (KES)</div></div>
+    <div class="stat g"><div class="stat-n">18</div><div class="stat-l">Trips</div></div>
+    <div class="stat gr"><div class="stat-n" style="color:var(--lg)">91%</div><div class="stat-l">Trust</div></div>
+  </div>
+  <div class="info">95% of every transport fee paid direct to your M-Pesa at delivery. No waiting. You can also buy and sell produce using this same account.</div>
+  <div class="card">
+    <div class="card-head"><span class="card-title">Last Payout</span><span class="badge green">Paid</span></div>
+    <div class="card-body">
+      <div class="row"><span class="rk">Route</span><span class="rv">Nakuru to Nairobi, 160km</span></div>
+      <div class="row"><span class="rk">Cargo</span><span class="rv">Tomatoes, 200 kg</span></div>
+      <div class="row"><span class="rk">Earned</span><span class="rv gold">KES 3,040</span></div>
+      <div class="row"><span class="rk">Date</span><span class="rv">19 Mar 2026</span></div>
+      <div class="row"><span class="rk">Buyer rating</span><span class="rv">${starsHTML(5,10)} On time, Careful handling</span></div>
+    </div>
+  </div>
+  <div class="tech-stack">
+    <div class="ts-title">Built on existing infrastructure</div>
+    <div class="ts-row"><div class="ts-dot"></div><div class="ts-name">Africa's Talking</div><div class="ts-desc">USSD gateway. One code across all four Kenyan networks simultaneously.</div></div>
+    <div class="ts-row"><div class="ts-dot"></div><div class="ts-name">M-Pesa Daraja API</div><div class="ts-desc">STK Push escrow. Interoperable across all networks since 2018. Includes Airtel, Equitel, and Telkom.</div></div>
+    <div class="ts-row"><div class="ts-dot"></div><div class="ts-name">Firebase</div><div class="ts-desc">Push notifications for smartphone drivers. Zero cost per message.</div></div>
+    <div class="ts-row"><div class="ts-dot"></div><div class="ts-name">KACE Data Feed</div><div class="ts-desc">Daily county market prices. Powers the floor price engine.</div></div>
+    <div class="ts-note">MazaoFlow assembles proven infrastructure. The KES 1M technical budget covers integration, not building any of these from scratch.</div>
+  </div>`;}
+
+// ─── USSD ────────────────────────────────────────────────────
+const FP_SCREENS={
+  main:[
+    {t:'*384#',c:'g'},{t:'MazaoFlow v1.0',c:'d'},{t:'',c:''},
+    {t:'1. Sell Produce  (Tomatoes)',c:'g'},{t:'2. Standing Order (Buy)',c:''},
+    {t:'3. Find Transport',c:''},{t:'4. My Receipts (23)',c:''},
+    {t:'5. My Trust Score',c:''},{t:'0. Exit',c:'d'},{t:'',c:''},
+    {t:'All networks. All roles.',c:'d'},{t:'Enter option: ',c:'cur'},
+  ],
+  sell:[
+    {t:'Sell Produce',c:'g'},{t:'',c:''},
+    {t:'Crop: Tomatoes',c:''},{t:'Qty (kg): 500',c:''},
+    {t:'Price/kg (KES): 62',c:''},{t:'Harvest date: 19/03/2026',c:''},
+    {t:'County: NAK (Nakuru)',c:''},{t:'',c:''},
+    {t:'Floor: KES 52/kg (KACE)',c:'d'},{t:'Your price: ABOVE floor',c:'gr'},
+    {t:'',c:''},{t:'1. Confirm',c:'g'},{t:'0. Back',c:'d'},
+    {t:'Enter: ',c:'cur'},
+  ],
+  posted:[
+    {t:'Listed!',c:'gr'},{t:'',c:''},
+    {t:'500kg Tomatoes @ KES 62',c:''},{t:'Harvest: 19/03/2026',c:'d'},
+    {t:'County: Nakuru',c:'d'},{t:'',c:''},
+    {t:'Matching buyers...',c:'g'},{t:'2 buyers notified.',c:'gr'},
+    {t:'',c:''},{t:'You will get SMS when',c:'d'},
+    {t:'escrow is funded.',c:'d'},{t:'',c:''},
+    {t:'DO NOT load until',c:'r'},{t:'driver shows 4-digit code.',c:'r'},
+  ],
+  buy:[
+    {t:'Standing Order',c:'g'},{t:'',c:''},
+    {t:'I want to buy regularly:',c:'d'},{t:'Crop: Tomatoes',c:''},
+    {t:'Qty/week (kg): 500',c:''},{t:'Max price: KES 65/kg',c:''},
+    {t:'Delivery: Every Monday',c:''},{t:'',c:''},
+    {t:'Buyers mainly use the app',c:'d'},{t:'for browsing and purchasing.',c:'d'},
+    {t:'Standing orders work here.',c:'d'},{t:'',c:''},
+    {t:'1. Confirm standing order',c:'g'},{t:'0. Back',c:'d'},
+    {t:'Enter: ',c:'cur'},
+  ],
+  trust:[
+    {t:'My MazaoTrust Score',c:'g'},{t:'',c:''},
+    {t:'Score: 94%',c:'gr'},{t:'Total reviews: 23',c:''},
+    {t:'',c:''},{t:'Top tags from buyers:',c:'d'},
+    {t:'Good quantity (18x)',c:''},{t:'Fresh produce (15x)',c:''},
+    {t:'Accurate desc. (12x)',c:''},{t:'',c:''},
+    {t:'Credit eligible (10+ done)',c:'gr'},
+    {t:'SMS sent on each update.',c:'d'},{t:'0. Back',c:'d'},
+  ],
+  transport:[
+    {t:'Find Transport',c:'g'},{t:'',c:''},
+    {t:'Pickup: Nakuru Farm',c:''},{t:'Delivery: Nairobi CBD',c:''},
+    {t:'Cargo: 500kg Tomatoes',c:''},{t:'',c:''},
+    {t:'Available transporters:',c:'d'},{t:'',c:''},
+    {t:'1. Peter Maina KCA456B',c:''},{t:'   KES 4,000  |  160km',c:'d'},
+    {t:'2. Ali Hassan KBZ123A',c:''},{t:'   KES 4,200  |  160km',c:'d'},
+    {t:'',c:''},{t:'Enter choice: ',c:'cur'},
+  ],
+};
+
+function initFP(){renderFP('main');}
+
+function renderFP(s){
+  fpScreen=s;
+  const el=document.getElementById('fp-lines');if(!el)return;
+  el.innerHTML='';
+  FP_SCREENS[s].forEach((line,i)=>{
+    const d=document.createElement('div');
+    d.className='fp-line'+(line.c?' '+line.c:'');
+    d.textContent=line.t;
+    el.appendChild(d);
+    setTimeout(()=>d.classList.add('v'),i*45);
+  });
+  const sms=document.getElementById('fp-sms');
+  if(sms){
+    sms.textContent = s==='posted'
+      ? 'SMS SENT: Listing live. You will receive SMS when a buyer funds escrow. DO NOT load until driver shows 4-digit code.'
+      : 'SMS: MazaoFlow receipt #24. Tomatoes 200kg. Net paid: KES 7,980. Trust: 94% (+1).';
+    sms.classList.toggle('v', s==='posted'||s==='trust');
+  }
+}
+
+function fpKey(k){
+  if(fpScreen==='main'){
+    if(k==='1')renderFP('sell');
+    else if(k==='2')renderFP('buy');
+    else if(k==='3')renderFP('transport');
+    else if(k==='4')renderFP('trust');
+    else if(k==='5')renderFP('trust');
+    else if(k==='0')renderFP('main');
+  }else if(fpScreen==='sell'){
+    if(k==='1'){
+      renderFP('posted');
+      toast('MazaoMarket','Jane Wanjiku posted 500kg Tomatoes, KES 62/kg, Nakuru. App updated instantly.');
+      setTimeout(()=>toast('Buyer Notified','David Kamau: New match in your area. 500kg Tomatoes, KES 62/kg.'),3500);
+    }
+    else if(k==='0')renderFP('main');
+  }else if(fpScreen==='buy'){
+    if(k==='1'){renderFP('main');toast('Standing Order','Order confirmed. You will be matched when produce is available.');}
+    else if(k==='0')renderFP('main');
+  }else if(fpScreen==='transport'){
+    if(k==='1'||k==='2'){renderFP('main');toast('MazaoMove','Transporter assigned. SMS sent with pickup details.');}
+    else if(k==='0')renderFP('main');
+  }else{renderFP('main');}
+}
+
+// ─── TRANSACTION FLOW ────────────────────────────────────────
+function openFlowScreen(){
+  document.getElementById('fv-flow-body').innerHTML=transactionFlow();
+  document.getElementById('fv-flow').classList.add('open');
+  setTimeout(animateFlow, 300);
+}
+
+function transactionFlow(){
+  const steps=[
+    {
+      num:1, title:'Farmer Posts Produce',
+      who:'Farmer (USSD or App)',
+      detail:'Jane dials *384# on any Kenyan network or opens the app. She enters crop type, quantity, price per kg, harvest date, and county. The system checks her price against the KACE county floor. If above the floor, the listing goes live instantly.',
+      note:'On app: Jane drops a GPS pin on her farm so buyers and transporters navigate directly.',
+      color:'var(--lg)',
+    },
+    {
+      num:2, title:'AI Matches Buyer',
+      who:'Platform (automatic)',
+      detail:'MazaoFlow notifies buyers who match by crop type, location, and purchase history. The buyer sees the listing with harvest date, farmer trust score, reviews, and full cost breakdown including transport and platform fee compared to the broker equivalent.',
+      note:'Buyers primarily use the app. Standing orders can also be placed via USSD.',
+      color:'var(--gold)',
+    },
+    {
+      num:3, title:'Buyer Pays into Escrow',
+      who:'Buyer (App)',
+      detail:'The buyer selects quantity and taps Pay. An M-Pesa STK Push is sent to their phone. They enter their M-Pesa PIN only. Funds move into escrow immediately. A 5-minute database lock fires: no other buyer can claim this listing.',
+      note:'The farmer receives an SMS: "Escrow funded. KES 12,400 secured. Wait for 4-digit code before loading."',
+      color:'var(--gold)',
+    },
+    {
+      num:4, title:'MazaoMove Dispatches Driver',
+      who:'Platform (automatic)',
+      detail:'The nearest verified transporter on the route receives a Firebase push (smartphone) or SMS (feature phone). The platform pays all notification costs. The driver has 10 minutes to accept. If they decline, the next driver is contacted automatically.',
+      note:'The 4-digit release code is generated at this point. The buyer sees it. The driver sees it. The farmer does not.',
+      color:'var(--mg)',
+    },
+    {
+      num:5, title:'Driver Arrives and Shows Code',
+      who:'Driver at farm gate',
+      detail:'The driver arrives at the GPS-pinned farm location. They show the farmer their phone with the 4-digit code. The farmer sees the code matches what their SMS described. They confirm and load the produce. The truck leaves.',
+      note:'The farmer cannot be cheated because nothing moves until the code appears. The driver cannot fake it because the buyer must enter the same code at delivery.',
+      color:'var(--mg)',
+    },
+    {
+      num:6, title:'Buyer Confirms and Funds Release',
+      who:'Buyer (App) at delivery',
+      detail:'The buyer inspects the produce on arrival. If satisfied, they enter the 4-digit code into the app. This single action releases the escrow simultaneously: the farmer receives their net payment via M-Pesa, and the driver receives their 95% commission via M-Pesa.',
+      note:'A MazaoReceipt is generated and SMS-delivered to the farmer. Trust scores update for both farmer and driver. Receipt counts toward credit eligibility.',
+      color:'var(--gold)',
+    },
+  ];
+
+  return`
+    <div style="background:var(--dg);border-radius:10px;padding:12px 14px;margin-bottom:12px;text-align:center;">
+      <div style="font-size:10px;color:var(--gl);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px;">One transaction. Six steps.</div>
+      <div style="font-size:12px;color:rgba(255,255,255,.6);line-height:1.5;">No middleman. No upfront risk to the farmer. No way for any party to disappear mid-transaction.</div>
+    </div>
+    ${steps.map((s,i)=>`
+      <div class="flow-step fade" id="fs-${i}" style="opacity:0;transform:translateY(8px);transition:opacity .4s ${i*0.1}s,transform .4s ${i*0.1}s;">
+        <div style="display:flex;align-items:flex-start;gap:10px;">
+          <div style="width:28px;height:28px;border-radius:50%;background:${s.color};display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--dg);flex-shrink:0;margin-top:2px;">${s.num}</div>
+          <div style="flex:1;">
+            <div style="font-size:12px;font-weight:600;color:var(--text);margin-bottom:2px;">${s.title}</div>
+            <div style="font-size:10px;color:var(--gold);margin-bottom:6px;font-weight:500;">${s.who}</div>
+            <div style="font-size:11px;color:var(--muted);line-height:1.6;margin-bottom:6px;">${s.detail}</div>
+            <div style="background:var(--cream);border-left:2px solid ${s.color};padding:6px 10px;font-size:10px;color:var(--text);line-height:1.5;border-radius:0 6px 6px 0;">${s.note}</div>
+          </div>
+        </div>
+        ${i<5?`<div style="width:2px;height:14px;background:var(--border);margin:6px 0 6px 13px;"></div>`:''}
+      </div>
+    `).join('')}
+    <div style="background:var(--gold);border-radius:10px;padding:12px;text-align:center;margin-top:8px;">
+      <div style="font-size:11px;font-weight:700;color:var(--dg);">The 4-digit code is the key.</div>
+      <div style="font-size:10px;color:var(--dg);margin-top:4px;line-height:1.5;">Buyer generates it. Driver carries it. Farmer sees it at the gate. Buyer enters it at delivery. One code unlocks money for both farmer and driver simultaneously.</div>
+    </div>`;
+}
+
+// ─── FULLVIEW HELPERS ────────────────────────────────────────
+function closeFV(id){document.getElementById(id).classList.remove('open');}
+function closeSuccess(id){document.getElementById(id).classList.remove('open');}
+
+</script>
+</body>
+</html>
