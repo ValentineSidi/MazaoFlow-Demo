@@ -165,6 +165,112 @@ body{font-family:'DM Sans',sans-serif;background:var(--off);color:var(--text);ov
 .fbtn{background:var(--w);border:1px solid var(--border);border-radius:16px;padding:4px 12px;font-size:10px;font-weight:500;color:var(--muted);cursor:pointer;white-space:nowrap;transition:all .15s;font-family:'DM Sans',sans-serif;flex-shrink:0}
 .fbtn.active{background:var(--dg);color:var(--gl);border-color:var(--dg)}
 
+/* PRODUCT GRID */
+.pgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}
+.pgrid-card{background:var(--w);border-radius:12px;overflow:hidden;cursor:pointer;box-shadow:0 1px 8px rgba(26,61,43,.08);transition:transform .15s,box-shadow .15s;position:relative}
+.pgrid-card:hover{transform:translateY(-2px);box-shadow:0 4px 16px rgba(26,61,43,.14)}
+.pgrid-img{width:100%;height:80px;object-fit:cover;display:block;position:relative}
+.pgrid-img-bg{width:100%;height:80px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:rgba(255,255,255,.6);letter-spacing:.3px;text-transform:uppercase}
+.pgrid-badge{position:absolute;top:5px;right:5px;font-size:8px;font-weight:700;padding:2px 6px;border-radius:4px;text-transform:uppercase;letter-spacing:.3px}
+.pgrid-badge.red{background:var(--rl);color:var(--w)}
+.pgrid-badge.gold{background:var(--gold);color:var(--dg)}
+.pgrid-badge.green{background:var(--lg);color:var(--w)}
+.pgrid-body{padding:7px 8px 9px}
+.pgrid-crop{font-size:11px;font-weight:700;color:var(--text);margin-bottom:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pgrid-county{font-size:9px;color:var(--muted);margin-bottom:4px}
+.pgrid-price{font-size:13px;font-weight:700;color:var(--gold);font-family:'DM Mono',monospace}
+.pgrid-price span{font-size:8px;color:var(--muted);font-weight:400;font-family:'DM Sans',sans-serif}
+.pgrid-trust{font-size:8px;color:var(--muted);margin-top:2px}
+
+/* SORT BAR */
+.sort-bar{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+.sort-count{font-size:10px;color:var(--muted)}
+.sort-sel{background:var(--w);border:1px solid var(--border);border-radius:8px;padding:4px 8px;font-size:9px;color:var(--text);font-family:'DM Sans',sans-serif;cursor:pointer;outline:none}
+
+/* HERO BANNER */
+.hero{background:var(--dg);border-radius:14px;padding:14px;margin-bottom:10px;position:relative;overflow:hidden}
+.hero::after{content:'';position:absolute;right:-20px;top:-20px;width:80px;height:80px;border-radius:50%;background:rgba(201,168,76,.08)}
+.hero-tag{font-size:9px;font-weight:700;color:var(--gl);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.hero-title{font-size:15px;font-weight:700;color:var(--w);margin-bottom:4px;font-family:'Playfair Display',serif;line-height:1.3}
+.hero-sub{font-size:10px;color:rgba(255,255,255,.5);line-height:1.5}
+.hero-cta{display:inline-block;background:var(--gold);color:var(--dg);font-size:10px;font-weight:700;padding:6px 14px;border-radius:7px;margin-top:8px;cursor:pointer;border:none;font-family:'DM Sans',sans-serif}
+
+/* SECTION ROW */
+.sec-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
+.sec-row-title{font-size:11px;font-weight:700;color:var(--text)}
+.sec-row-link{font-size:10px;color:var(--gold);cursor:pointer;font-weight:500}
+
+/* HORIZONTAL SCROLL CARDS */
+.hscroll{display:flex;gap:8px;overflow-x:auto;margin-bottom:12px;padding-bottom:4px;scrollbar-width:none}
+.hscroll::-webkit-scrollbar{display:none}
+.hcard{background:var(--w);border-radius:12px;overflow:hidden;flex-shrink:0;width:130px;cursor:pointer;box-shadow:0 1px 8px rgba(26,61,43,.08);transition:transform .15s}
+.hcard:hover{transform:translateY(-2px)}
+.hcard-img{width:130px;height:70px;object-fit:cover;display:block}
+.hcard-img-bg{width:130px;height:70px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:rgba(255,255,255,.5);text-transform:uppercase}
+.hcard-body{padding:6px 8px 8px}
+.hcard-crop{font-size:10px;font-weight:700;color:var(--text)}
+.hcard-price{font-size:11px;font-weight:700;color:var(--gold);font-family:'DM Mono',monospace;margin-top:1px}
+.hcard-tag{font-size:8px;color:var(--muted)}
+
+/* SAVINGS BANNER */
+.savings-bar{background:linear-gradient(135deg,var(--dg),var(--mg));border-radius:12px;padding:10px 12px;display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.sb-icon{font-size:20px;flex-shrink:0}
+.sb-title{font-size:11px;font-weight:700;color:var(--w)}
+.sb-sub{font-size:9px;color:rgba(255,255,255,.5);margin-top:1px}
+.sb-amount{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:var(--gold);margin-left:auto;flex-shrink:0}
+
+/* PRODUCT PAGE */
+.pp-img{width:100%;height:140px;object-fit:cover;display:block}
+.pp-img-bg{width:100%;height:140px;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;color:rgba(255,255,255,.4);text-transform:uppercase}
+.pp-head{padding:12px 14px 8px}
+.pp-crop{font-size:18px;font-weight:700;color:var(--text);font-family:'Playfair Display',serif}
+.pp-meta{font-size:10px;color:var(--muted);margin-top:2px}
+.pp-price-row{display:flex;align-items:flex-end;gap:6px;margin:8px 0}
+.pp-price{font-size:24px;font-weight:700;color:var(--gold);font-family:'DM Mono',monospace;line-height:1}
+.pp-unit{font-size:10px;color:var(--muted);margin-bottom:3px}
+.pp-saving{font-size:10px;color:var(--lg);font-weight:600;background:rgba(61,122,82,.08);padding:3px 8px;border-radius:5px}
+.pp-divider{height:1px;background:var(--border);margin:8px 14px}
+.pp-section{padding:0 14px 8px}
+.pp-sec-title{font-size:10px;font-weight:700;color:var(--text);text-transform:uppercase;letter-spacing:.4px;margin-bottom:6px}
+.pp-farmer-row{display:flex;align-items:center;gap:10px;background:var(--off);border-radius:10px;padding:10px}
+.pp-farmer-name{font-size:12px;font-weight:600;color:var(--text)}
+.pp-farmer-meta{font-size:9px;color:var(--muted);margin-top:1px}
+.pp-qty-row{display:flex;align-items:center;gap:8px;margin:6px 0}
+.pp-qty-label{font-size:10px;color:var(--muted);flex:1}
+.pp-qty-ctrl{display:flex;align-items:center;gap:6px;background:var(--w);border:1px solid var(--border);border-radius:8px;padding:5px 8px}
+.pp-qty-btn{background:var(--dg);color:var(--w);border:none;border-radius:5px;width:22px;height:22px;font-size:13px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.pp-qty-val{font-family:'DM Mono',monospace;font-size:12px;font-weight:600;min-width:50px;text-align:center}
+.pp-cost{background:var(--dg);border-radius:10px;padding:12px 14px;margin:0 14px 10px}
+.pc-lbl{font-size:9px;color:var(--gl);font-weight:700;text-transform:uppercase;letter-spacing:.4px;margin-bottom:8px}
+.pc-row{display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid rgba(255,255,255,.05);font-size:10px}
+.pc-row:last-child{border:none;padding-top:5px}
+.pck{color:rgba(255,255,255,.4)}.pcv{color:var(--w);font-family:'DM Mono',monospace;font-weight:500}
+.pcv.gold{color:var(--gold);font-size:13px;font-weight:700}.pcv.strike{color:rgba(255,120,120,.45);text-decoration:line-through}
+.pck.save{color:var(--gl);font-weight:600}
+.pp-buy-btn{margin:0 14px 14px;width:calc(100% - 28px);background:var(--gold);color:var(--dg);border:none;border-radius:10px;padding:13px;font-size:13px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;letter-spacing:.2px}
+.pp-own-transport{display:flex;align-items:center;gap:8px;padding:6px 14px;font-size:10px;color:var(--muted);border-top:1px solid var(--border)}
+
+/* LISTING FORM */
+.lf-wrap{background:var(--w);border-radius:14px;overflow:hidden;margin-bottom:10px}
+.lf-head{background:var(--dg);padding:10px 14px}
+.lf-head-title{font-size:12px;font-weight:600;color:var(--w)}
+.lf-head-sub{font-size:9px;color:var(--gl);margin-top:1px}
+.lf-body{padding:14px}
+.lf-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.lf-full{grid-column:1/-1}
+.lf-lbl{font-size:9px;color:var(--muted);letter-spacing:.4px;text-transform:uppercase;margin-bottom:4px;display:block}
+.lf-inp,.lf-sel{width:100%;background:var(--off);border:1px solid var(--border);border-radius:8px;padding:9px 11px;font-size:12px;color:var(--text);font-family:'DM Sans',sans-serif;outline:none;transition:border-color .2s;appearance:none}
+.lf-inp:focus,.lf-sel:focus{border-color:var(--borderg)}
+.lf-floor{border-radius:7px;padding:7px 10px;font-size:10px;margin-top:4px;line-height:1.5}
+.lf-floor.ok{background:rgba(61,122,82,.06);border:1px solid rgba(61,122,82,.15);color:var(--mg)}
+.lf-floor.warn{background:rgba(139,46,46,.05);border:1px solid rgba(139,46,46,.15);color:var(--red)}
+.lf-preview{background:var(--off);border-radius:10px;padding:10px 12px;display:flex;gap:10px;align-items:center;margin-top:10px;border:1px dashed var(--borderg)}
+.lf-prev-img{width:48px;height:48px;border-radius:8px;object-fit:cover;flex-shrink:0}
+.lf-prev-img-bg{width:48px;height:48px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:rgba(255,255,255,.5);text-transform:uppercase;flex-shrink:0}
+.lf-prev-crop{font-size:12px;font-weight:700;color:var(--text)}
+.lf-prev-price{font-size:11px;color:var(--gold);font-family:'DM Mono',monospace;font-weight:600;margin-top:2px}
+.lf-prev-meta{font-size:9px;color:var(--muted);margin-top:1px}
+
 /* TAGS */
 .tags{display:flex;flex-wrap:wrap;gap:3px;margin-top:6px}
 .tag{background:var(--off);border:1px solid var(--borderg);color:var(--text);font-size:9px;font-weight:500;padding:2px 7px;border-radius:4px}
@@ -576,11 +682,18 @@ const NEG_DRIVER = ['Late arrival','Rough handling','Unprofessional','Poor commu
 
 function starSVG(f,s=12){const c=f?'#C9A84C':'#D0CCBF';return`<svg viewBox="0 0 20 20" width="${s}" height="${s}" style="display:inline-block;vertical-align:middle"><path fill="${c}" d="M10 1l2.4 7.4H20l-6.2 4.5 2.4 7.4L10 16l-6.2 4.3 2.4-7.4L0 8.4h7.6z"/></svg>`;}
 function starsHTML(n,s=11){return[1,2,3,4,5].map(i=>starSVG(i<=n,s)).join('');}
+function daysSince(dateStr){
+  const months={'Jan':0,'Feb':1,'Mar':2,'Apr':3,'May':4,'Jun':5,'Jul':6,'Aug':7,'Sep':8,'Oct':9,'Nov':10,'Dec':11};
+  const parts=dateStr.split(' ');
+  const d=new Date(parseInt(parts[2]),months[parts[1]],parseInt(parts[0]));
+  const now=new Date('2026-03-22');
+  return Math.max(0,Math.round((now-d)/(1000*60*60*24)));
+}
 
 // ─── STATE ──────────────────────────────────────────────────
 let appRole='farmer', buyQty=200, ownTransport=false;
-let activeFilter='All', s1=4, s2=4;
-let fpScreen='main';
+let activeFilter='All', marketSort='urgent', s1=4, s2=4;
+let fpScreen='main', fpInput='', fpQty='', fpPrice='', fpCrop='Tomatoes';
 
 // ─── TYPEWRITER ─────────────────────────────────────────────
 const TW_WORDS=['Flow','Market','Move','Pay','Flow'];
@@ -773,36 +886,66 @@ function farmerListCard(l){return`
   </div>`;}
 
 function farmerPost(){return`
-  <div class="form-wrap">
-    <label class="flbl">Crop type</label>
-    <select class="fsel"><option>Tomatoes</option><option>Onions</option><option>Cabbage</option><option>Capsicum</option><option>Kale (Sukuma Wiki)</option><option>Carrots</option><option>Avocado</option><option>Mango</option><option>Bananas</option><option>Passion Fruit</option></select>
-    <label class="flbl">Quantity (kg)</label>
-    <input class="finp" type="number" value="500" id="p-qty" oninput="checkFloor()">
-    <label class="flbl">Price per kg (KES)</label>
-    <input class="finp" type="number" value="62" id="p-price" oninput="checkFloor()">
-    <div class="floor-ok" id="f-ok">County floor: KES 52/kg (KACE today). Your price is above the floor.</div>
-    <div class="floor-warn" id="f-warn">Below county floor of KES 52/kg. You can still list, but consider adjusting.</div>
-    <label class="flbl">Harvest date</label>
-    <input class="finp" type="date" value="2026-03-19">
-    <label class="flbl">County (type first 3 letters)</label>
-    <input class="finp" type="text" value="Nakuru" placeholder="e.g. NAK for Nakuru">
-    <label class="flbl">GPS pin (drag to your farm)</label>
-    <div class="map-widget">
-      <div class="map-bg"></div>
-      <div class="map-road h"></div><div class="map-road v"></div>
-      <div class="map-pin farm" id="farm-pin" style="cursor:grab;"></div>
-      <div class="map-label" style="left:28%;top:5%;font-size:7px;">Nakuru</div>
-      <div class="map-label" style="right:5%;bottom:5%;font-size:7px;">Tap to move pin</div>
+  <div class="lf-wrap">
+    <div class="lf-head">
+      <div class="lf-head-title">List Your Produce</div>
+      <div class="lf-head-sub">Buyers are notified instantly when you post. KACE floor price checked automatically.</div>
     </div>
-    <div style="font-size:9px;color:var(--muted);margin-bottom:6px;">USSD users register county name only. App users set exact GPS pin so buyers and transporters navigate directly to your farm.</div>
-    <button class="abtn gold" onclick="postProduce()">Post to MazaoMarket</button>
+    <div class="lf-body">
+      <div class="lf-grid">
+        <div class="lf-full">
+          <label class="lf-lbl">Crop type</label>
+          <select class="lf-sel" onchange="updateListingPreview()">
+            <option>Tomatoes</option><option>Onions</option><option>Cabbage</option>
+            <option>Capsicum</option><option>Kale (Sukuma Wiki)</option><option>Carrots</option>
+            <option>Avocado</option><option>Mango</option><option>Bananas</option><option>Passion Fruit</option>
+          </select>
+        </div>
+        <div>
+          <label class="lf-lbl">Quantity (kg)</label>
+          <input class="lf-inp" type="number" value="500" id="p-qty" oninput="checkFloor();updateListingPreview()">
+        </div>
+        <div>
+          <label class="lf-lbl">Price / kg (KES)</label>
+          <input class="lf-inp" type="number" value="62" id="p-price" oninput="checkFloor();updateListingPreview()">
+        </div>
+        <div>
+          <label class="lf-lbl">Harvest date</label>
+          <input class="lf-inp" type="date" value="2026-03-19">
+        </div>
+        <div>
+          <label class="lf-lbl">County</label>
+          <input class="lf-inp" type="text" value="Nakuru" placeholder="NAK">
+        </div>
+        <div class="lf-full">
+          <label class="lf-lbl">GPS pin (app users)</label>
+          <div class="map-widget" style="height:70px;">
+            <div class="map-bg"></div><div class="map-road h"></div><div class="map-road v"></div>
+            <div class="map-pin farm"></div>
+            <div class="map-label" style="left:26%;top:8%;font-size:7px;">Nakuru Farm</div>
+            <div class="map-label" style="right:6%;bottom:8%;font-size:7px;">Buyers navigate here</div>
+          </div>
+        </div>
+      </div>
+      <div class="lf-floor ok" id="f-ok">KACE county floor: KES 52/kg. Your price is above the floor.</div>
+      <div class="lf-floor warn" id="f-warn" style="display:none;">Below KACE county floor of KES 52/kg. You can still list.</div>
+      <div class="lf-preview" id="lf-preview">
+        <div class="lf-prev-img-bg" id="lf-prev-bg" style="background:#c0392b;">TOM</div>
+        <div>
+          <div class="lf-prev-crop" id="lf-prev-crop">Tomatoes, 500kg</div>
+          <div class="lf-prev-price" id="lf-prev-price">KES 62/kg</div>
+          <div class="lf-prev-meta">Nakuru &bull; This is what buyers will see</div>
+        </div>
+      </div>
+      <button class="abtn gold" style="margin-top:10px;" onclick="postProduce()">Post to MazaoMarket</button>
+    </div>
   </div>
   <div class="pcalc">
-    <div class="pc-hd">Profit Projection Engine</div>
-    <div class="pc-row"><span class="pk">Market price</span><span class="pv" id="pp-m">KES 62/kg</span></div>
+    <div class="pc-hd">Profit Projection</div>
+    <div class="pc-row"><span class="pk">Your price</span><span class="pv" id="pp-m">KES 62/kg</span></div>
     <div class="pc-row"><span class="pk">Transport (est. 160km)</span><span class="pv" id="pp-t">- KES 20/kg</span></div>
     <div class="pc-row"><span class="pk">Platform fee (5%)</span><span class="pv" id="pp-f">- KES 3/kg</span></div>
-    <div class="pc-row tot"><span class="pk">Net to farmer</span><span class="pv" id="pp-n">= KES 39/kg</span></div>
+    <div class="pc-row tot"><span class="pk">Net to you</span><span class="pv" id="pp-n">= KES 39/kg</span></div>
     <div class="pc-sl">
       <label>Adjust price</label>
       <input type="range" min="20" max="150" value="62" oninput="updateProfit(this.value)">
@@ -810,9 +953,23 @@ function farmerPost(){return`
     </div>
   </div>`;}
 
+function updateListingPreview(){
+  const crops={'Tomatoes':'#c0392b','Onions':'#c17f24','Cabbage':'#27ae60','Kale (Sukuma Wiki)':'#1a6b3a','Avocado':'#2d6a1f','Capsicum':'#e74c3c','Mango':'#e67e22','Bananas':'#f39c12','Passion Fruit':'#7d3c98','Carrots':'#e67e22'};
+  const sel=document.querySelector('.lf-sel');
+  const crop=sel?sel.value:'Tomatoes';
+  const qty=document.getElementById('p-qty')?.value||500;
+  const price=document.getElementById('p-price')?.value||62;
+  const bg=document.getElementById('lf-prev-bg');
+  const pc=document.getElementById('lf-prev-crop');
+  const pp=document.getElementById('lf-prev-price');
+  if(bg){bg.style.background=crops[crop]||'#2D5A3D';bg.textContent=crop.slice(0,3).toUpperCase();}
+  if(pc)pc.textContent=crop+', '+qty+'kg';
+  if(pp)pp.textContent='KES '+price+'/kg';
+}
+
 function postProduce(){
   toast('MazaoMarket','Listing posted. 2 buyers notified in Nakuru county.');
-  setTimeout(()=>toast('MazaoMove','Transporter dispatch ready once escrow is funded.'),3500);
+  setTimeout(()=>toast('Buyer Match','David Kamau: New listing matches your standing order.'),3500);
 }
 function checkFloor(){
   const p=parseFloat(document.getElementById('p-price')?.value||62);
@@ -829,6 +986,7 @@ function updateProfit(price){
   const pn=document.getElementById('pp-n');if(pn)pn.textContent='= KES '+n+'/kg';
   const pl=document.getElementById('pp-lbl');if(pl)pl.textContent='KES '+price;
 }
+
 
 function farmerReceipts(){return`
   <div class="sms-notif">SMS: MazaoFlow receipt #23. Tomatoes 200kg. Net: KES 7,980. Trust score updated to 94% (+1). Issued 19 Mar 2026 14:32.</div>
@@ -868,251 +1026,249 @@ function renderBuyerTab(tab){
   else if(tab==='review')b.innerHTML=reviewPage();
 }
 
-function buyerHome(){return`
-  <div style="padding:4px 0 10px;">
-    <div style="font-size:16px;font-weight:600;color:var(--text);">Good morning, David.</div>
-    <div style="font-size:11px;color:var(--muted);margin-top:2px;">3 new matches today. Tap your avatar for your full profile.</div>
+function buyerHome(){
+  const urgent=LISTINGS.filter(l=>l.urgent).slice(0,4);
+  const fresh=LISTINGS.filter(l=>!l.urgent).slice(0,4);
+  return`
+  <div class="hero">
+    <div class="hero-tag">MazaoMarket</div>
+    <div class="hero-title">Farm to door.<br>No middleman.</div>
+    <div class="hero-sub">Direct from verified farmers. Pay via M-Pesa. Secure escrow on every order.</div>
+    <button class="hero-cta" onclick="showBuyerTab('market',document.querySelectorAll('#nav-buyer .nav-item')[1]);document.querySelectorAll('#nav-buyer .nav-item').forEach(b=>b.classList.remove('active'));document.querySelectorAll('#nav-buyer .nav-item')[1].classList.add('active')">Browse Market</button>
   </div>
-  <div class="info">Buying directly through MazaoFlow removes the broker markup. You pay farm price plus a 5% platform fee and transport.</div>
-  <div class="sec-hd">Top Match Today</div>
-  ${buyerCardSmall(LISTINGS[5])}
-  <div class="sec-hd" style="margin-top:4px;">Standing Orders</div>
-  <div class="card">
-    <div class="card-head"><span class="card-title">Tomatoes, 500kg per order</span><span class="badge green">Active</span></div>
-    <div class="card-body">
-      <div class="row"><span class="rk">Max price</span><span class="rv">KES 65/kg</span></div>
-      <div class="row"><span class="rk">Notify me</span><span class="rv">When matching farmer posts</span></div>
-      <div class="row"><span class="rk">Last matched</span><span class="rv green">Today, 1 farmer found</span></div>
-      <button class="abtn outline" style="margin-top:6px;" onclick="showBuyerTab('market',document.querySelectorAll('#nav-buyer .nav-item')[1])">Browse full market</button>
-    </div>
+  <div class="savings-bar">
+    <div class="sb-icon">&#127807;</div>
+    <div><div class="sb-title">Your savings vs brokers</div><div class="sb-sub">7 orders completed</div></div>
+    <div class="sb-amount">KES 18,200</div>
   </div>
-`;}
+  <div class="sec-row">
+    <div class="sec-row-title">Move Fast. Urgent Produce.</div>
+    <div class="sec-row-link" onclick="showBuyerTab('market',document.querySelectorAll('#nav-buyer .nav-item')[1]);document.querySelectorAll('#nav-buyer .nav-item').forEach(b=>b.classList.remove('active'));document.querySelectorAll('#nav-buyer .nav-item')[1].classList.add('active')">See all</div>
+  </div>
+  <div class="hscroll">${urgent.map(l=>hCard(l)).join('')}</div>
+  <div class="sec-row">
+    <div class="sec-row-title">Freshly Harvested</div>
+    <div class="sec-row-link" onclick="showBuyerTab('market',document.querySelectorAll('#nav-buyer .nav-item')[1]);document.querySelectorAll('#nav-buyer .nav-item').forEach(b=>b.classList.remove('active'));document.querySelectorAll('#nav-buyer .nav-item')[1].classList.add('active')">See all</div>
+  </div>
+  <div class="hscroll">${fresh.map(l=>hCard(l)).join('')}</div>
+  <div style="background:var(--w);border-radius:14px;padding:12px 14px;margin-bottom:10px;">
+    <div class="sec-row-title" style="margin-bottom:8px;">Standing Order</div>
+    <div class="row"><span class="rk">Tomatoes, 500kg per order</span><span class="rv" style="color:var(--lg);font-size:10px;">Active</span></div>
+    <div class="row"><span class="rk">Max price</span><span class="rv">KES 65/kg</span></div>
+    <div class="row"><span class="rk">Last matched</span><span class="rv" style="color:var(--lg)">Today</span></div>
+  </div>`;}
 
-function buyerCardSmall(l){return`
-  <div class="card" onclick="openListing(${l.id})">
-    <img class="produce-img" src="${l.img}" alt="${l.crop}" loading="lazy" onerror="this.style.display='none'">
-    <div class="card-head">
-      <span class="card-title">${l.crop}, ${l.qty-l.sold}kg available</span>
-      <span class="badge ${l.urgent?'red':'green'}">${l.urgent?'Urgent':'Fresh'}</span>
+function hCard(l){
+  const days=daysSince(l.harv);
+  const cc=CROP_COLORS[l.crop]||'#2D5A3D';
+  return`<div class="hcard" onclick="openListing(${l.id})">
+    <div style="position:relative;height:70px;overflow:hidden;">
+      <div class="hcard-img-bg" style="background:${cc};">${l.crop}</div>
+      <img class="hcard-img" src="${l.img}" alt="${l.crop}" loading="lazy" onerror="this.style.display='none'" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
+      <span class="pgrid-badge ${days>=4?'red':days>=2?'gold':'green'}" style="position:absolute;top:4px;right:4px;">${days}d</span>
     </div>
-    <div class="card-body">
-      <div class="row"><span class="rk">Farm price</span><span class="rv gold">KES ${l.price}/kg</span></div>
-      <div class="row"><span class="rk">Harvested</span><span class="rv">${l.harv}</span></div>
-      <div class="row"><span class="rk">Farmer trust</span><span class="rv">${starsHTML(Math.round(l.trust/20))} ${l.trust}%</span></div>
-      <div class="row"><span class="rk">Distance</span><span class="rv">${l.distKm} km</span></div>
-      <div class="tags">${l.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div>
-      <button class="abtn" onclick="event.stopPropagation();openListing(${l.id})" style="margin-top:8px;">View full details</button>
+    <div class="hcard-body">
+      <div class="hcard-crop">${l.crop}</div>
+      <div class="hcard-price">KES ${l.price}<span style="font-size:8px;color:var(--muted);font-weight:400;">/kg</span></div>
+      <div class="hcard-tag">${l.county}</div>
     </div>
   </div>`;}
+
+const CROP_COLORS={'Tomatoes':'#c0392b','Onions':'#c17f24','Cabbage':'#27ae60','Kale':'#1a6b3a','Avocado':'#2d6a1f','Capsicum':'#e74c3c','Mango':'#e67e22','Bananas':'#f39c12','Passion Fruit':'#7d3c98'};
 
 function buyerMarket(){
   const filters=['All','Tomatoes','Onions','Cabbage','Kale','Avocado','Capsicum','Mango','Bananas','Passion Fruit'];
-  const sorted=[...LISTINGS]
-    .filter(l=>activeFilter==='All'||l.crop===activeFilter)
-    .sort((a,b)=>daysSince(b.harv)-daysSince(a.harv));
+  let sorted=[...LISTINGS].filter(l=>activeFilter==='All'||l.crop===activeFilter);
+  if(marketSort==='price_asc') sorted.sort((a,b)=>a.price-b.price);
+  else if(marketSort==='price_desc') sorted.sort((a,b)=>b.price-a.price);
+  else if(marketSort==='fresh') sorted.sort((a,b)=>daysSince(a.harv)-daysSince(b.harv));
+  else sorted.sort((a,b)=>daysSince(b.harv)-daysSince(a.harv));
   return`
     <div class="filter-bar">${filters.map(f=>`<button class="fbtn ${f===activeFilter?'active':''}" onclick="setFilter('${f}')">${f}</button>`).join('')}</div>
-    <div style="background:var(--cream);border-left:3px solid var(--gold);border-radius:0 8px 8px 0;padding:9px 12px;font-size:10px;color:var(--text);margin-bottom:10px;line-height:1.6;">
-      <strong>How matching works:</strong> These listings are shown to you because they match your purchase history and location. New listings appear at the top. A USSD farmer who posts right now appears here instantly. Badge colour shows how recently produce was harvested. Red means it needs to move today. Gold means 2 to 3 days old. Green means just harvested.
+    <div class="sort-bar">
+      <span class="sort-count">${sorted.length} listing${sorted.length!==1?'s':''}</span>
+      <select class="sort-sel" onchange="setSort(this.value)">
+        <option value="urgent" ${marketSort==='urgent'?'selected':''}>Most urgent</option>
+        <option value="fresh" ${marketSort==='fresh'?'selected':''}>Freshest first</option>
+        <option value="price_asc" ${marketSort==='price_asc'?'selected':''}>Price: low to high</option>
+        <option value="price_desc" ${marketSort==='price_desc'?'selected':''}>Price: high to low</option>
+      </select>
     </div>
-    <button class="abtn" style="margin-bottom:10px;background:var(--mg);" onclick="openFlowScreen()">See how a transaction works end to end</button>
-    ${sorted.map(l=>marketCard(l)).join('')}`;}
+    <div class="pgrid">${sorted.map(l=>pgridCard(l)).join('')}</div>`;}
 
-function daysSince(dateStr){
-  const d=new Date(dateStr),now=new Date('2026-03-21');
-  return Math.round((now-d)/(1000*60*60*24));
-}
-
-function setFilter(f){activeFilter=f;renderBuyerTab('market');}
-
-function marketCard(l){
+function pgridCard(l){
   const days=daysSince(l.harv);
-  const urgentLabel = days>=4 ? 'Move fast, '+days+'d old' : days>=2 ? days+'d since harvest' : 'Just harvested';
-  const badgeClass = days>=4?'red':days>=2?'gold':'green';
-  const cropColors = {'Tomatoes':'#c0392b','Onions':'#c17f24','Cabbage':'#27ae60','Kale':'#1a6b3a','Avocado':'#2d6a1f','Capsicum':'#e74c3c','Mango':'#e67e22','Bananas':'#f1c40f','Passion Fruit':'#8e44ad','Bananas':'#f39c12'};
-  const bg = cropColors[l.crop]||'#2D5A3D';
-  return`<div class="card" onclick="openListing(${l.id})">
-    <div style="position:relative;width:100%;height:90px;overflow:hidden;">
-      <div style="position:absolute;inset:0;background:${bg};display:flex;align-items:center;justify-content:center;">
-        <span style="font-size:11px;font-weight:600;color:rgba(255,255,255,.5);letter-spacing:.5px;text-transform:uppercase;">${l.crop}</span>
-      </div>
-      <img style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;" src="${l.img}" alt="${l.crop}" loading="lazy" onerror="this.style.display='none'">
+  const cc=CROP_COLORS[l.crop]||'#2D5A3D';
+  const bclass=days>=4?'red':days>=2?'gold':'green';
+  const blabel=days>=4?'Urgent':days>=2?days+'d old':'Fresh';
+  return`<div class="pgrid-card" onclick="openListing(${l.id})">
+    <div style="position:relative;height:80px;overflow:hidden;">
+      <div class="pgrid-img-bg" style="background:${cc};">${l.crop}</div>
+      <img class="pgrid-img" src="${l.img}" alt="${l.crop}" loading="lazy" onerror="this.style.display='none'" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
+      <span class="pgrid-badge ${bclass}">${blabel}</span>
     </div>
-    <div class="card-head">
-      <span class="card-title">${l.crop}, ${l.qty-l.sold}kg, ${l.county}</span>
-      <span class="badge ${badgeClass}" title="${days>=4?'Harvest was '+days+' days ago. Needs to move.':days>=2?'Harvested '+days+' days ago':'Harvested today or yesterday'}">${urgentLabel}</span>
-    </div>
-    <div class="card-body">
-      <div class="row"><span class="rk">Farm price</span><span class="rv gold">KES ${l.price}/kg</span></div>
-      <div class="row"><span class="rk">Farmer trust</span><span class="rv">${starsHTML(Math.round(l.trust/20))} ${l.trust}%</span></div>
-      <div class="row"><span class="rk">Distance</span><span class="rv">${l.distKm} km from Nairobi</span></div>
-      <div class="tags">${l.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div>
+    <div class="pgrid-body">
+      <div class="pgrid-crop">${l.crop}</div>
+      <div class="pgrid-county">${l.county} &bull; ${l.qty-l.sold}kg</div>
+      <div class="pgrid-price">KES ${l.price}<span>/kg</span></div>
+      <div class="pgrid-trust">${starsHTML(Math.round(l.trust/20),9)} ${l.trust}%</div>
     </div>
   </div>`;}
+
+function setFilter(f){activeFilter=f;renderBuyerTab('market');}
+function setSort(s){marketSort=s;renderBuyerTab('market');}
 
 function openListing(id){
   const l=LISTINGS.find(x=>x.id===id);
   document.getElementById('fv-listing-title').textContent=l.crop+' from '+l.county;
-  document.getElementById('fv-listing-body').innerHTML=listingDetail(l);
+  document.getElementById('fv-listing-body').innerHTML=productPage(l);
   document.getElementById('fv-listing').classList.add('open');
-  setTimeout(()=>updateCost(l),50);
-}
+  setTimeout(()=>updatePPCost(l),50);}
 
-function listingDetail(l){
+function productPage(l){
+  const cc=CROP_COLORS[l.crop]||'#2D5A3D';
   const produce=buyQty*l.price;
   const tc=ownTransport?0:tcost(l.distKm,buyQty);
-  const pf=Math.round(produce*PLATFORM);
+  const pf=Math.round(produce*0.05);
   const total=produce+tc+pf;
   const broker=Math.round(produce*1.5);
+  const days=daysSince(l.harv);
   return`
-    <img src="${l.img}" alt="${l.crop}" style="width:100%;height:140px;object-fit:cover;border-radius:10px;margin-bottom:12px;" loading="lazy" onerror="this.style.display='none'">
-    <div class="profile-head" style="margin-bottom:10px;">
-      <div class="avatar">JW</div>
-      <div class="profile-info">
-        <div class="profile-name">Jane Wanjiku</div>
-        <div class="profile-type">Verified Farmer, ${l.county} County</div>
-        <div class="profile-trust">${starsHTML(Math.round(l.trust/20),10)}<span style="font-size:10px;color:var(--muted);">${l.trust}% (${l.reviews} reviews)</span></div>
+    <div style="position:relative;height:140px;overflow:hidden;">
+      <div class="pp-img-bg" style="background:${cc};">${l.crop}</div>
+      <img class="pp-img" src="${l.img}" alt="${l.crop}" loading="lazy" onerror="this.style.display='none'" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
+      <div style="position:absolute;top:10px;right:10px;background:${days>=4?'var(--rl)':days>=2?'var(--gold)':'var(--lg)'};color:${days>=2&&days<4?'var(--dg)':'var(--w)'};font-size:9px;font-weight:700;padding:3px 8px;border-radius:5px;">${days>=4?'Urgent: '+days+'d old':days>=2?days+'d since harvest':'Just harvested'}</div>
+    </div>
+    <div class="pp-head">
+      <div class="pp-crop">${l.crop}</div>
+      <div class="pp-meta">${l.county} County &bull; Harvested ${l.harv} &bull; ${l.qty-l.sold}kg available</div>
+      <div class="pp-price-row">
+        <div class="pp-price">KES ${l.price}</div>
+        <div class="pp-unit">per kg</div>
+        <div class="pp-saving">Save vs broker</div>
       </div>
     </div>
-    <div class="map-widget">
-      <div class="map-bg"></div>
-      <div class="map-road h"></div><div class="map-road v"></div>
-      <div class="map-pin farm"></div>
-      <div class="map-pin dest"></div>
-      <div class="map-route"></div>
-      <div class="map-label" style="left:22%;top:8%;font-size:7px;">${l.county} Farm</div>
-      <div class="map-label" style="right:8%;bottom:8%;font-size:7px;">Your location</div>
-      <div class="map-label" style="top:50%;left:45%;font-size:7px;color:var(--gold);">${l.distKm}km</div>
-    </div>
-    <div class="card" style="margin-bottom:10px;">
-      <div class="card-body">
-        <div class="row"><span class="rk">Crop</span><span class="rv">${l.crop}</span></div>
-        <div class="row"><span class="rk">Available</span><span class="rv">${l.qty-l.sold} kg (${l.sold > 0 ? l.sold+'kg already sold via partial orders' : 'full stock available'})</span></div>
-        <div class="row"><span class="rk">Farm price</span><span class="rv gold">KES ${l.price}/kg</span></div>
-        <div class="row"><span class="rk">Harvested</span><span class="rv">${l.harv}</span></div>
-        <div class="row"><span class="rk">County</span><span class="rv">${l.county} (GPS pin set)</span></div>
-        <div class="tags">${l.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div>
-      </div>
-    </div>
-    <div class="sec-hd">Recent Reviews</div>
-    <div class="card" style="margin-bottom:10px;">
-      <div class="card-body">
-        <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
-          <div class="avatar" style="width:28px;height:28px;font-size:10px;">HK</div>
-          <div><div style="font-size:11px;font-weight:500;">Hotel Sarova</div><div style="font-size:9px;color:var(--muted);">Hotel / Restaurant</div></div>
-          <div style="margin-left:auto">${starsHTML(5,10)}</div>
+    <div class="pp-divider"></div>
+    <div class="pp-section">
+      <div class="pp-sec-title">Farmer</div>
+      <div class="pp-farmer-row">
+        <div class="avatar" style="width:36px;height:36px;font-size:12px;">JW</div>
+        <div>
+          <div class="pp-farmer-name">Jane Wanjiku</div>
+          <div class="pp-farmer-meta">${starsHTML(Math.round(l.trust/20),10)} ${l.trust}% &bull; ${l.reviews} reviews</div>
+          <div style="display:flex;flex-wrap:wrap;gap:3px;margin-top:4px;">${l.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div>
         </div>
-        <div class="tags"><span class="tag">Good quantity</span><span class="tag">Fresh produce</span><span class="tag">Ready on time</span></div>
       </div>
     </div>
-    <div class="sec-hd">Select Quantity (partial orders allowed)</div>
-    <div class="qty-ctrl">
-      <button class="qty-btn" onclick="chQty(-50,${l.id})">-</button>
-      <div class="qty-val" id="qd-${l.id}">${buyQty} kg</div>
-      <button class="qty-btn" onclick="chQty(50,${l.id})">+</button>
-    </div>
-    <div class="cost-table" id="ct-${l.id}">
-      <div class="ct-title">Full Cost Breakdown vs Broker</div>
-      <div class="ct-row"><span class="ck">Produce (${buyQty}kg x KES ${l.price})</span><span class="cv" id="c-produce-${l.id}">KES ${produce.toLocaleString()}</span></div>
-      <div class="ct-row"><span class="ck">Transport (${l.distKm}km at KES ${RATE_KM}/km)</span><span class="cv" id="c-transport-${l.id}">KES ${tc.toLocaleString()}</span></div>
-      <div class="ct-row"><span class="ck">Platform fee (5%)</span><span class="cv" id="c-fee-${l.id}">KES ${pf.toLocaleString()}</span></div>
-      <div class="ct-row"><span class="ck">Total via MazaoFlow</span><span class="cv gold" id="c-total-${l.id}">KES ${total.toLocaleString()}</span></div>
-      <div class="ct-row"><span class="ck">Via broker (est. 50% markup)</span><span class="cv strike">KES ${broker.toLocaleString()}</span></div>
-      <div class="ct-row"><span class="ck save">You save</span><span class="cv gold">KES ${(broker-total).toLocaleString()}</span></div>
-      <div class="t-toggle">
-        <span class="t-toggle-lbl">I have my own transport (skip MazaoMove)</span>
-        <label class="tswitch">
-          <input type="checkbox" id="tt-${l.id}" onchange="toggleTransport(this.checked,${l.id})" ${ownTransport?'checked':''}>
-          <div class="ttrack"></div>
-          <div class="tthumb"></div>
-        </label>
+    <div class="pp-divider"></div>
+    <div class="pp-section">
+      <div class="pp-sec-title">Quantity</div>
+      <div class="pp-qty-row">
+        <div class="pp-qty-label">How many kg?</div>
+        <div class="pp-qty-ctrl">
+          <button class="pp-qty-btn" onclick="ppQty(-50,${l.id})">-</button>
+          <div class="pp-qty-val" id="ppq-${l.id}">${buyQty} kg</div>
+          <button class="pp-qty-btn" onclick="ppQty(50,${l.id})">+</button>
+        </div>
       </div>
     </div>
-    <button class="abtn gold" onclick="openPayment(${l.id})" style="margin-top:8px;">Pay KES ${total.toLocaleString()} via M-Pesa</button>
-    <button class="abtn outline" onclick="closeFV('fv-listing')" style="margin-top:6px;">Back to Market</button>`;}
+    <div class="pp-cost" id="ppc-${l.id}">
+      <div class="pc-lbl">Cost Breakdown</div>
+      <div class="pc-row"><span class="pck">Produce (${buyQty}kg x KES ${l.price})</span><span class="pcv" id="pp-produce-${l.id}">KES ${produce.toLocaleString()}</span></div>
+      <div class="pc-row"><span class="pck">Transport (${l.distKm}km)</span><span class="pcv" id="pp-tc-${l.id}">KES ${tc.toLocaleString()}</span></div>
+      <div class="pc-row"><span class="pck">Platform fee (5%)</span><span class="pcv" id="pp-fee-${l.id}">KES ${pf.toLocaleString()}</span></div>
+      <div class="pc-row"><span class="pck">Total</span><span class="pcv gold" id="pp-total-${l.id}">KES ${total.toLocaleString()}</span></div>
+      <div class="pc-row"><span class="pck">Via broker (est.)</span><span class="pcv strike">KES ${broker.toLocaleString()}</span></div>
+      <div class="pc-row"><span class="pck save">You save</span><span class="pcv gold" id="pp-save-${l.id}">KES ${(broker-total).toLocaleString()}</span></div>
+    </div>
+    <div class="pp-own-transport">
+      <span style="flex:1;">I have my own transport</span>
+      <label class="tswitch">
+        <input type="checkbox" id="pp-ot-${l.id}" onchange="ppToggleTransport(this.checked,${l.id})" ${ownTransport?'checked':''}>
+        <div class="ttrack"></div><div class="tthumb"></div>
+      </label>
+    </div>
+    <button class="pp-buy-btn" id="pp-buy-${l.id}" onclick="openPayment(${l.id})">Pay KES ${total.toLocaleString()} via M-Pesa</button>`;}
 
-function chQty(d,lid){
+function ppQty(d,lid){
   buyQty=Math.max(50,Math.min(500,buyQty+d));
   const l=LISTINGS.find(x=>x.id===lid);
-  const qd=document.getElementById('qd-'+lid);if(qd)qd.textContent=buyQty+' kg';
-  updateCostDisplay(l);
-}
-
-function toggleTransport(v,lid){
-  ownTransport=v;
-  const l=LISTINGS.find(x=>x.id===lid);
-  updateCostDisplay(l);
-}
-
-function updateCost(l){updateCostDisplay(l);}
-
-function updateCostDisplay(l){
+  const el=document.getElementById('ppq-'+lid);if(el)el.textContent=buyQty+' kg';
+  updatePPCost(l);}
+function ppToggleTransport(v,lid){ownTransport=v;const l=LISTINGS.find(x=>x.id===lid);updatePPCost(l);}
+function updatePPCost(l){
   if(!l)return;
   const produce=buyQty*l.price;
   const tc=ownTransport?0:tcost(l.distKm,buyQty);
-  const pf=Math.round(produce*PLATFORM);
+  const pf=Math.round(produce*0.05);
   const total=produce+tc+pf;
   const broker=Math.round(produce*1.5);
-  const cp=document.getElementById('c-produce-'+l.id);if(cp)cp.textContent='KES '+produce.toLocaleString();
-  const ct=document.getElementById('c-transport-'+l.id);if(ct)ct.textContent='KES '+(ownTransport?'0 (own transport)':tc.toLocaleString());
-  const cf=document.getElementById('c-fee-'+l.id);if(cf)cf.textContent='KES '+pf.toLocaleString();
-  const ctot=document.getElementById('c-total-'+l.id);if(ctot)ctot.textContent='KES '+total.toLocaleString();
-  const pbtn=document.querySelector('.abtn.gold');if(pbtn&&pbtn.textContent.startsWith('Pay'))pbtn.textContent='Pay KES '+total.toLocaleString()+' via M-Pesa';
-}
+  const set=(id,v)=>{const e=document.getElementById(id);if(e)e.textContent=v;};
+  set('pp-produce-'+l.id,`KES ${produce.toLocaleString()}`);
+  set('pp-tc-'+l.id,ownTransport?'KES 0 (own)':'KES '+tc.toLocaleString());
+  set('pp-fee-'+l.id,`KES ${Math.round(produce*0.05).toLocaleString()}`);
+  set('pp-total-'+l.id,`KES ${total.toLocaleString()}`);
+  set('pp-save-'+l.id,`KES ${(broker-total).toLocaleString()}`);
+  const btn=document.getElementById('pp-buy-'+l.id);
+  if(btn)btn.textContent=`Pay KES ${total.toLocaleString()} via M-Pesa`;}
 
 function openPayment(lid){
   const l=LISTINGS.find(x=>x.id===lid);
   const produce=buyQty*l.price;
   const tc=ownTransport?0:tcost(l.distKm,buyQty);
-  const pf=Math.round(produce*PLATFORM);
+  const pf=Math.round(produce*0.05);
   const total=produce+tc+pf;
   const broker=Math.round(produce*1.5);
   document.getElementById('fv-payment-body').innerHTML=`
-    <div style="text-align:center;padding:16px 0 8px;">
-      <div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;">M-Pesa STK Push</div>
-      <div style="font-family:'Playfair Display',serif;font-size:32px;font-weight:700;color:var(--text);">KES ${total.toLocaleString()}</div>
-      <div style="font-size:11px;color:var(--muted);margin-top:4px;">${buyQty}kg ${l.crop} from ${l.county}</div>
+    <div style="text-align:center;padding:20px 0 12px;">
+      <div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;">M-Pesa Escrow Payment</div>
+      <div style="font-family:'Playfair Display',serif;font-size:36px;font-weight:700;color:var(--text);">KES ${total.toLocaleString()}</div>
+      <div style="font-size:11px;color:var(--muted);margin-top:4px;">${buyQty}kg ${l.crop} &bull; ${l.county}</div>
     </div>
-    <div class="cost-table" style="margin-bottom:12px;">
-      <div class="ct-title">Payment Breakdown</div>
-      <div class="ct-row"><span class="ck">Produce (${buyQty}kg x KES ${l.price})</span><span class="cv">KES ${produce.toLocaleString()}</span></div>
-      <div class="ct-row"><span class="ck">Transport (${l.distKm}km)</span><span class="cv">KES ${ownTransport?'0 (own)':tc.toLocaleString()}</span></div>
-      <div class="ct-row"><span class="ck">Platform fee (5%)</span><span class="cv">KES ${pf.toLocaleString()}</span></div>
-      <div class="ct-row"><span class="ck">Total to pay</span><span class="cv gold">KES ${total.toLocaleString()}</span></div>
-      <div class="ct-row"><span class="ck">Broker equivalent</span><span class="cv strike">KES ${broker.toLocaleString()}</span></div>
-      <div class="ct-row"><span class="ck save">You save</span><span class="cv gold">KES ${(broker-total).toLocaleString()}</span></div>
+    <div class="pp-cost" style="margin:0 0 12px;">
+      <div class="pc-lbl">Payment Breakdown</div>
+      <div class="pc-row"><span class="pck">Produce</span><span class="pcv">KES ${produce.toLocaleString()}</span></div>
+      <div class="pc-row"><span class="pck">Transport</span><span class="pcv">KES ${ownTransport?'0 (own)':tc.toLocaleString()}</span></div>
+      <div class="pc-row"><span class="pck">Platform fee (5%)</span><span class="pcv">KES ${pf.toLocaleString()}</span></div>
+      <div class="pc-row"><span class="pck">Total</span><span class="pcv gold">KES ${total.toLocaleString()}</span></div>
+      <div class="pc-row"><span class="pck">Broker equivalent</span><span class="pcv strike">KES ${broker.toLocaleString()}</span></div>
+      <div class="pc-row"><span class="pck save">You save</span><span class="pcv gold">KES ${(broker-total).toLocaleString()}</span></div>
     </div>
-    <div class="info">Funds held in escrow until delivery is confirmed with a 4-digit code. 5-minute database lock is now active. No other buyer can claim this listing.</div>
-    <div style="background:var(--off);border-radius:10px;padding:12px;margin-bottom:12px;font-size:11px;color:var(--muted);line-height:1.6;text-align:center;">An STK Push has been sent to +254 700 000 001.<br>Enter your M-Pesa PIN on your phone to confirm.</div>
-    <button class="abtn gold" onclick="confirmPayment(${lid})">Confirm M-Pesa PIN</button>
-    <button class="abtn outline" onclick="closeFV('fv-payment')" style="margin-top:6px;">Cancel</button>`;
+    <div style="background:var(--off);border-radius:10px;padding:12px;margin-bottom:12px;font-size:11px;color:var(--muted);text-align:center;line-height:1.6;">STK Push sent to +254 700 000 001.<br>Funds held in escrow until delivery confirmed.<br>Farmer cannot load until driver shows 4-digit code.</div>
+    <button class="pp-buy-btn" style="margin:0 0 8px;width:100%;" onclick="confirmPayment(${lid})">Confirm M-Pesa PIN</button>
+    <button class="abtn outline" onclick="closeFV('fv-payment')" style="margin-top:4px;">Cancel</button>`;
   closeFV('fv-listing');
-  document.getElementById('fv-payment').classList.add('open');
-}
+  document.getElementById('fv-payment').classList.add('open');}
 
 function confirmPayment(lid){
   closeFV('fv-payment');
   document.getElementById('ss-payment').classList.add('open');
-  setTimeout(()=>toast('MazaoMove','Transporter dispatched. ETA: 2h 20min.'),1200);
-  setTimeout(()=>toast('Farmer Notified','Jane Wanjiku: DO NOT LOAD. Wait for 4-digit code.'),4000);
-}
+  setTimeout(()=>toast('MazaoMove','Transporter dispatched. ETA 2h 20min.'),1200);
+  setTimeout(()=>toast('Farmer Notified','Jane Wanjiku: DO NOT LOAD. Wait for 4-digit code.'),4000);}
 
 function buyerOrders(){return`
-  <div class="info">Completed orders show full cost vs broker comparison. Your savings to date: KES 18,200.</div>
-  <div class="card">
-    <div class="card-head"><span class="card-title">Tomatoes, 200kg from Nakuru</span><span class="badge green">Delivered</span></div>
-    <div class="card-body">
-      <div class="row"><span class="rk">Produce</span><span class="rv">KES 12,400</span></div>
-      <div class="row"><span class="rk">Transport (160km)</span><span class="rv">KES 3,200</span></div>
-      <div class="row"><span class="rk">Platform (5%)</span><span class="rv">KES 620</span></div>
-      <div class="row"><span class="rk">Total paid</span><span class="rv gold">KES 16,220</span></div>
-      <div class="row"><span class="rk">Broker equivalent</span><span class="rv red" style="text-decoration:line-through;">KES 18,600</span></div>
-      <div class="row"><span class="rk">Saved</span><span class="rv green">KES 2,380</span></div>
-      <div class="row"><span class="rk">Driver</span><span class="rv">Peter Maina, KCA 456B</span></div>
-      <div class="row"><span class="rk">Status</span><span class="rv green">Funds released on 4-digit code</span></div>
-      <button class="abtn outline" onclick="showBuyerTab('review',null);document.querySelectorAll('#nav-buyer .nav-item')[3].classList.add('active')">Rate this transaction</button>
+  <div class="savings-bar" style="margin-bottom:10px;">
+    <div class="sb-icon">&#127807;</div>
+    <div><div class="sb-title">Total saved vs brokers</div><div class="sb-sub">Across 7 completed orders</div></div>
+    <div class="sb-amount">KES 18,200</div>
+  </div>
+  <div class="sec-row-title" style="margin-bottom:8px;padding:0 2px;">Recent Orders</div>
+  <div style="background:var(--w);border-radius:14px;overflow:hidden;margin-bottom:10px;box-shadow:var(--sh);">
+    <div style="display:flex;align-items:center;gap:10px;padding:10px 12px;border-bottom:1px solid var(--border);">
+      <div style="width:44px;height:44px;border-radius:8px;background:#c0392b;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:rgba(255,255,255,.5);flex-shrink:0;">TOM</div>
+      <div style="flex:1;"><div style="font-size:12px;font-weight:600;color:var(--text);">Tomatoes, 200kg</div><div style="font-size:10px;color:var(--muted);">Nakuru &bull; 19 Mar 2026</div></div>
+      <span class="badge green">Delivered</span>
+    </div>
+    <div style="padding:10px 12px;">
+      <div class="row"><span class="rk">Paid</span><span class="rv gold">KES 16,220</span></div>
+      <div class="row"><span class="rk">Broker equivalent</span><span class="rv" style="text-decoration:line-through;color:var(--red);">KES 18,600</span></div>
+      <div class="row"><span class="rk">Saved</span><span class="rv" style="color:var(--lg);font-weight:700;">KES 2,380</span></div>
+      <div class="row"><span class="rk">Transporter</span><span class="rv">Peter Maina &bull; KCA 456B</span></div>
+      <div class="row"><span class="rk">Released via</span><span class="rv">4-digit code confirmed</span></div>
+      <button class="abtn outline" style="margin-top:8px;" onclick="showBuyerTab('review',null);document.querySelectorAll('#nav-buyer .nav-item').forEach(b=>b.classList.remove('active'));document.querySelectorAll('#nav-buyer .nav-item')[3].classList.add('active')">Rate this transaction</button>
     </div>
   </div>`;}
+
 
 // ─── REVIEW ─────────────────────────────────────────────────
 function reviewPage(){return`
@@ -1320,29 +1476,29 @@ const FP_SCREENS={
     {t:'Enter: ',c:'cur'},
   ],
   buy2:[
-    {t:'Tomatoes - Standing Order',c:'g'},{t:'',c:''},
+    {t:'Standing Order',c:'g'},{t:'',c:''},
+    {t:'Crop: __CROP__',c:'gr'},{t:'',c:''},
     {t:'How many kg per order?',c:'d'},{t:'',c:''},
-    {t:'Type quantity, then ENTER',c:'d'},{t:'',c:''},
-    {t:'Example: 500',c:'d'},{t:'',c:''},
-    {t:'ENTER to confirm',c:'g'},{t:'0. Back',c:'d'},
+    {t:'Type with keypad below',c:'d'},{t:'',c:''},
+    {t:'Qty entered: __QTY__',c:'g'},
+    {t:'ENTER to confirm  |  0. Back',c:'d'},
   ],
   buy3:[
-    {t:'Tomatoes - Standing Order',c:'g'},{t:'',c:''},
-    {t:'Qty: 500 kg confirmed',c:'gr'},{t:'',c:''},
-    {t:'Your max price per kg?',c:'d'},{t:'',c:''},
-    {t:'Type KES amount, then ENTER',c:'d'},{t:'',c:''},
-    {t:'Example: 65',c:'d'},{t:'',c:''},
-    {t:'ENTER to confirm',c:'g'},{t:'0. Back',c:'d'},
+    {t:'Standing Order',c:'g'},{t:'',c:''},
+    {t:'Crop: __CROP__',c:'gr'},
+    {t:'Qty: __QTY__ kg confirmed',c:'gr'},{t:'',c:''},
+    {t:'Max price per kg (KES)?',c:'d'},{t:'',c:''},
+    {t:'Price entered: KES __PRICE__',c:'g'},
+    {t:'ENTER to confirm  |  0. Back',c:'d'},
   ],
   buy4:[
     {t:'Standing Order Set!',c:'gr'},{t:'',c:''},
-    {t:'Crop: Tomatoes',c:''},
-    {t:'Qty: 500 kg per order',c:''},
-    {t:'Max price: KES 65/kg',c:''},{t:'',c:''},
-    {t:'You will get SMS when a',c:'d'},
-    {t:'matching farmer posts.',c:'d'},{t:'',c:''},
-    {t:'App shows full listing.',c:'d'},
-    {t:'Pay via app or call us.',c:'d'},
+    {t:'Crop: __CROP__',c:''},
+    {t:'Qty: __QTY__ kg per order',c:''},
+    {t:'Max price: KES __PRICE__/kg',c:''},{t:'',c:''},
+    {t:'SMS when a matching',c:'d'},
+    {t:'farmer posts.',c:'d'},{t:'',c:''},
+    {t:'Browse and pay via app.',c:'d'},
   ],
   trust:[
     {t:'My MazaoTrust Score',c:'g'},{t:'',c:''},
@@ -1374,12 +1530,17 @@ function initFP(){renderFP('main');}
 
 function renderFP(s){
   fpScreen=s;
+  if(s==='buy2'||s==='buy3') fpInput='';
   const el=document.getElementById('fp-lines');if(!el)return;
   el.innerHTML='';
   FP_SCREENS[s].forEach((line,i)=>{
     const d=document.createElement('div');
     d.className='fp-line'+(line.c?' '+line.c:'');
-    d.textContent=line.t;
+    let txt=line.t
+      .replace('__CROP__', fpCrop)
+      .replace('__QTY__', fpQty||'_')
+      .replace('__PRICE__', fpPrice||'_');
+    d.textContent=txt;
     el.appendChild(d);
     setTimeout(()=>d.classList.add('v'),i*45);
   });
@@ -1393,6 +1554,7 @@ function renderFP(s){
 }
 
 function fpKey(k){
+  const CROP_NAMES=['Tomatoes','Onions','Cabbage','Capsicum','Kale','Avocado','Mango','Bananas','Passion Fruit'];
   if(fpScreen==='main'){
     if(k==='1')renderFP('sell');
     else if(k==='2')renderFP('crops');
@@ -1402,27 +1564,35 @@ function fpKey(k){
     else if(k==='6')renderFP('trust');
     else if(k==='0')renderFP('main');
   }else if(fpScreen==='crops'){
-    if(k==='0')renderFP('main');
-    else renderFP('sell');
+    const idx=parseInt(k)-1;
+    if(idx>=0&&idx<CROP_NAMES.length){fpCrop=CROP_NAMES[idx];renderFP('sell');}
+    else if(k==='0'||k==='back')renderFP('main');
   }else if(fpScreen==='sell'){
     if(k==='1'){
       renderFP('posted');
-      toast('MazaoMarket','Jane Wanjiku posted 500kg Tomatoes, KES 62/kg, Nakuru. App updated instantly.');
-      setTimeout(()=>toast('Buyer Notified','David Kamau: New match in your area. 500kg Tomatoes, KES 62/kg.'),3500);
+      toast('MazaoMarket','Jane Wanjiku posted 500kg '+fpCrop+', KES 62/kg, Nakuru. App updated instantly.');
+      setTimeout(()=>toast('Buyer Notified','David Kamau: New match in your area. 500kg '+fpCrop+', KES 62/kg.'),3500);
     }
     else if(k==='0'||k==='back')renderFP('main');
   }else if(fpScreen==='buy'){
-    if(k>='1'&&k<='6')renderFP('buy2');
+    const idx=parseInt(k)-1;
+    if(idx>=0&&idx<6){fpCrop=CROP_NAMES[idx]||'Tomatoes';fpQty='';fpPrice='';renderFP('buy2');}
     else if(k==='0'||k==='back')renderFP('main');
   }else if(fpScreen==='buy2'){
-    if(k==='enter')renderFP('buy3');
-    else if(k==='0'||k==='back')renderFP('buy');
+    if(k==='enter'&&fpQty){renderFP('buy3');}
+    else if(k==='back'){fpQty=fpQty.slice(0,-1);renderFP('buy2');}
+    else if(k==='clr'){fpQty='';renderFP('buy2');}
+    else if(k>='0'&&k<='9'){fpQty+=k;renderFP('buy2');}
+    else if(k==='0'&&!fpQty)renderFP('buy');
   }else if(fpScreen==='buy3'){
-    if(k==='enter'){
+    if(k==='enter'&&fpPrice){
       renderFP('buy4');
-      toast('Standing Order Set','You will be notified via SMS when a matching farmer posts.');
+      toast('Standing Order Set','Crop: '+fpCrop+' '+fpQty+'kg at max KES '+fpPrice+'/kg. SMS when matched.');
     }
-    else if(k==='0'||k==='back')renderFP('buy2');
+    else if(k==='back'){fpPrice=fpPrice.slice(0,-1);renderFP('buy3');}
+    else if(k==='clr'){fpPrice='';renderFP('buy3');}
+    else if(k>='0'&&k<='9'){fpPrice+=k;renderFP('buy3');}
+    else if(k==='0'&&!fpPrice)renderFP('buy2');
   }else if(fpScreen==='buy4'){
     renderFP('main');
   }else if(fpScreen==='transport'){
