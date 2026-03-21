@@ -65,9 +65,9 @@ body{font-family:'DM Sans',sans-serif;background:var(--off);color:var(--text);ov
 .tb-av{width:30px;height:30px;border-radius:50%;background:var(--mg);border:1.5px solid var(--gold);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;color:var(--gold);cursor:pointer;flex-shrink:0}
 
 /* ── NOTIFICATION TOAST ── */
-.toast{position:fixed;top:60px;left:50%;transform:translateX(-50%) translateY(-80px);background:var(--dg);border:1px solid rgba(201,168,76,.25);border-radius:12px;padding:10px 16px;font-size:12px;color:var(--w);z-index:999;transition:transform .35s cubic-bezier(.34,1.56,.64,1);white-space:nowrap;box-shadow:var(--shd);max-width:340px;text-align:center}
+.toast{position:fixed;top:60px;left:50%;transform:translateX(-50%) translateY(-80px);background:var(--dg);border:1px solid rgba(201,168,76,.25);border-radius:12px;padding:10px 16px;font-size:11px;color:var(--w);z-index:999;transition:transform .35s cubic-bezier(.34,1.56,.64,1);white-space:normal;word-break:break-word;box-shadow:var(--shd);width:calc(100% - 32px);max-width:320px;text-align:center}
 .toast.show{transform:translateX(-50%) translateY(0)}
-.toast .t-label{font-size:10px;color:var(--gl);font-weight:600;text-transform:uppercase;letter-spacing:.4px;margin-bottom:2px}
+.toast .t-label{font-size:9px;color:var(--gl);font-weight:600;text-transform:uppercase;letter-spacing:.4px;margin-bottom:2px}
 
 /* ── SPLIT LAYOUT ── */
 .split-wrap{display:grid;grid-template-columns:1fr 1fr;gap:0;min-height:calc(100vh - 100px)}
@@ -94,6 +94,8 @@ body{font-family:'DM Sans',sans-serif;background:var(--off);color:var(--text);ov
 .fp-pad{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;margin-top:8px}
 .fp-k{background:#252525;border:none;border-radius:5px;color:#777;font-size:10px;font-family:'DM Mono',monospace;padding:7px 2px;cursor:pointer;transition:background .12s,color .12s;text-align:center}
 .fp-k:hover{background:#2e2e2e}.fp-k:active{background:var(--gold);color:#000}
+.fp-enter{grid-column:1/-1;background:var(--mg);border:none;border-radius:5px;color:var(--gl);font-size:10px;font-family:'DM Mono',monospace;padding:7px;cursor:pointer;transition:background .12s;text-align:center;margin-top:2px;letter-spacing:.5px;font-weight:600}
+.fp-enter:hover{background:var(--lg)}.fp-enter:active{background:var(--gold);color:var(--dg)}
 .fp-hint{font-size:10px;color:rgba(255,255,255,.25);text-align:center;max-width:220px;line-height:1.5}
 .fp-net{display:flex;gap:5px;align-items:center;justify-content:center;margin-top:6px;flex-wrap:wrap}
 .fp-net-badge{font-size:9px;color:rgba(255,255,255,.3);border:1px solid rgba(255,255,255,.1);border-radius:3px;padding:1px 5px;font-family:'DM Mono',monospace}
@@ -318,7 +320,31 @@ input[type=range]{flex:1;accent-color:var(--gold)}
 .ss-sub{font-size:12px;color:rgba(255,255,255,.45);line-height:1.6;margin-bottom:24px;max-width:260px}
 .ss-btn{background:var(--gold);color:var(--dg);border:none;border-radius:10px;padding:12px 28px;font-size:13px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif}
 
-@media(max-width:700px){.split-wrap{grid-template-columns:1fr}.split-pane.left{display:none}.smartphone{width:100%;max-width:340px}}
+/* ── PROFILE DRAWER ── */
+.drawer-overlay{position:fixed;inset:0;background:rgba(0,0,0,0);z-index:400;display:none;transition:background .3s}
+.drawer-overlay.open{display:block;background:rgba(0,0,0,.45)}
+.drawer{position:fixed;top:0;right:-320px;width:300px;height:100vh;background:var(--w);z-index:401;transition:right .3s cubic-bezier(.4,0,.2,1);overflow-y:auto;box-shadow:-4px 0 24px rgba(0,0,0,.15)}
+.drawer.open{right:0}
+.drawer-head{background:var(--dg);padding:20px 18px 16px;position:relative}
+.drawer-close{position:absolute;top:14px;right:14px;background:rgba(255,255,255,.1);border:none;color:var(--w);width:28px;height:28px;border-radius:50%;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;transition:background .15s}
+.drawer-close:hover{background:rgba(255,255,255,.2)}
+.drawer-av{width:52px;height:52px;border-radius:50%;background:var(--mg);border:2px solid var(--gold);display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:700;color:var(--gold);margin-bottom:10px}
+.drawer-name{font-size:16px;font-weight:600;color:var(--w);margin-bottom:2px}
+.drawer-role{font-size:11px;color:var(--gl);margin-bottom:6px}
+.drawer-trust{display:flex;align-items:center;gap:6px}
+.drawer-body{padding:16px}
+.drawer-section{margin-bottom:16px}
+.drawer-sec-title{font-size:10px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px}
+.drawer-stat{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border)}
+.drawer-stat:last-child{border:none}
+.ds-label{font-size:12px;color:var(--muted)}
+.ds-val{font-size:13px;font-weight:600;color:var(--text)}
+.ds-val.gold{color:var(--gold)}
+.ds-val.green{color:var(--lg)}
+.drawer-switch{display:flex;gap:6px;margin-top:14px}
+.dsw-btn{flex:1;padding:9px;border-radius:8px;font-size:11px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;border:1px solid var(--border);background:var(--off);color:var(--muted);transition:all .15s;text-align:center}
+.dsw-btn.active{background:var(--dg);color:var(--gl);border-color:var(--dg)}
+.dsw-btn:hover:not(.active){background:var(--cream)}
 </style>
 </head>
 <body>
@@ -342,7 +368,7 @@ input[type=range]{flex:1;accent-color:var(--gold)}
     <label class="si-lbl">National ID</label>
     <input class="si-inp" type="text" value="12345678">
     <label class="si-lbl">Phone (OTP sent on sign in)</label>
-    <input class="si-inp" type="text" value="+254 712 345 678">
+    <input class="si-inp" type="text" value="+254 700 000 001">
     <label class="si-lbl" style="margin-top:2px;">Starting role</label>
     <div class="role-opt sel" onclick="pickR(this,'farmer')">
       <div class="rdot"></div>
@@ -368,8 +394,21 @@ input[type=range]{flex:1;accent-color:var(--gold)}
     <div class="tb-brand">Mazao<span>Flow</span></div>
     <div class="tb-r">
       <div class="tb-role" id="tb-role">Farmer</div>
-      <div class="tb-av" id="tb-av" onclick="cycleRole()" title="Switch role">JW</div>
+      <div class="tb-av" id="tb-av" onclick="openDrawer()" title="View profile">JW</div>
     </div>
+  </div>
+
+  <!-- PROFILE DRAWER -->
+  <div class="drawer-overlay" id="drawer-overlay" onclick="closeDrawer()"></div>
+  <div class="drawer" id="profile-drawer">
+    <div class="drawer-head">
+      <button class="drawer-close" onclick="closeDrawer()">&#215;</button>
+      <div class="drawer-av" id="d-av">JW</div>
+      <div class="drawer-name" id="d-name">Jane Wanjiku</div>
+      <div class="drawer-role" id="d-role">Farmer, Open University of Kenya</div>
+      <div class="drawer-trust" id="d-trust"></div>
+    </div>
+    <div class="drawer-body" id="d-body"></div>
   </div>
 
   <!-- TOAST -->
@@ -394,10 +433,11 @@ input[type=range]{flex:1;accent-color:var(--gold)}
             <button class="fp-k" onclick="fpKey('1')">1</button><button class="fp-k" onclick="fpKey('2')">2</button><button class="fp-k" onclick="fpKey('3')">3</button>
             <button class="fp-k" onclick="fpKey('4')">4</button><button class="fp-k" onclick="fpKey('5')">5</button><button class="fp-k" onclick="fpKey('6')">6</button>
             <button class="fp-k" onclick="fpKey('7')">7</button><button class="fp-k" onclick="fpKey('8')">8</button><button class="fp-k" onclick="fpKey('9')">9</button>
-            <button class="fp-k" onclick="fpKey('*')">*</button><button class="fp-k" onclick="fpKey('0')">0</button><button class="fp-k" onclick="fpKey('#')">#</button>
+            <button class="fp-k" onclick="fpKey('back')">&#8592;</button><button class="fp-k" onclick="fpKey('0')">0</button><button class="fp-k" onclick="fpKey('clr')">C</button>
+            <button class="fp-enter" onclick="fpKey('enter')">ENTER</button>
           </div>
         </div>
-        <div class="fp-hint">Press 1 to sell, 2 to buy (standing order), 3 for transport, 5 for trust score. Press 0 to go back.</div>
+        <div class="fp-hint">Press numbers to select. Use ENTER to confirm. Back arrow to go back.</div>
         <div class="fp-net">
           <span class="fp-net-badge active" id="n0">Airtel</span>
           <span class="fp-net-badge" id="n1">Safaricom</span>
@@ -581,6 +621,94 @@ function initApp(){
 
 function cycleRole(){const rs=['farmer','buyer','driver'];switchAppRole(rs[(rs.indexOf(appRole)+1)%3]);}
 
+function openDrawer(){
+  const d=ROLE_INFO[appRole];
+  document.getElementById('d-av').textContent=d.initials;
+  document.getElementById('d-name').textContent=d.name;
+  document.getElementById('d-role').textContent=
+    appRole==='farmer'?'Farmer, Open University of Kenya':
+    appRole==='buyer'?'Hotel / Restaurant Buyer':'Verified Transporter, Nairobi Routes';
+  document.getElementById('d-trust').innerHTML=
+    starsHTML(appRole==='farmer'?4:appRole==='buyer'?4:4,11)+
+    `<span style="font-size:10px;color:var(--gl);margin-left:4px;">${d.trust} MazaoTrust</span>`;
+
+  const body=document.getElementById('d-body');
+  if(appRole==='farmer'){
+    body.innerHTML=`
+      <div class="drawer-section">
+        <div class="drawer-sec-title">Account Summary</div>
+        <div class="drawer-stat"><span class="ds-label">MazaoReceipts</span><span class="ds-val gold">23 (credit eligible)</span></div>
+        <div class="drawer-stat"><span class="ds-label">Trust Score</span><span class="ds-val green">94%</span></div>
+        <div class="drawer-stat"><span class="ds-label">Live Listings</span><span class="ds-val">2</span></div>
+        <div class="drawer-stat"><span class="ds-label">National ID</span><span class="ds-val" style="font-family:'DM Mono',monospace;">*****8821</span></div>
+        <div class="drawer-stat"><span class="ds-label">County</span><span class="ds-val">Nakuru</span></div>
+        <div class="drawer-stat"><span class="ds-label">Network</span><span class="ds-val">Airtel</span></div>
+      </div>
+      <div class="drawer-section">
+        <div class="drawer-sec-title">Credit Status</div>
+        <div style="background:rgba(45,90,61,.08);border-left:3px solid var(--lg);border-radius:0 8px 8px 0;padding:10px 12px;font-size:11px;color:var(--text);line-height:1.6;">
+          23 receipts completed. You are credit eligible. Present your MazaoReceipt history to any microfinance institution to apply for a loan.
+        </div>
+      </div>
+      <div class="drawer-section">
+        <div class="drawer-sec-title">Switch Role</div>
+        <div class="drawer-switch">
+          <div class="dsw-btn active">Farmer</div>
+          <div class="dsw-btn" onclick="closeDrawer();switchAppRole('buyer');showBuyerTab('home',document.querySelectorAll('#nav-buyer .nav-item')[0])">Buyer</div>
+          <div class="dsw-btn" onclick="closeDrawer();switchAppRole('driver');showDriverTab('home',document.querySelectorAll('#nav-driver .nav-item')[0])">Driver</div>
+        </div>
+        <div style="font-size:10px;color:var(--muted);margin-top:8px;text-align:center;">One account. All three roles.</div>
+      </div>`;
+  }else if(appRole==='buyer'){
+    body.innerHTML=`
+      <div class="drawer-section">
+        <div class="drawer-sec-title">Account Summary</div>
+        <div class="drawer-stat"><span class="ds-label">Orders Completed</span><span class="ds-val">7</span></div>
+        <div class="drawer-stat"><span class="ds-label">Total Spent</span><span class="ds-val">KES 84,200</span></div>
+        <div class="drawer-stat"><span class="ds-label">Total Saved vs Broker</span><span class="ds-val green">KES 18,200</span></div>
+        <div class="drawer-stat"><span class="ds-label">Trust Score</span><span class="ds-val green">88%</span></div>
+        <div class="drawer-stat"><span class="ds-label">Buyer Type</span><span class="ds-val">Hotel / Restaurant</span></div>
+        <div class="drawer-stat"><span class="ds-label">Standing Orders</span><span class="ds-val gold">1 active</span></div>
+      </div>
+      <div class="drawer-section">
+        <div class="drawer-sec-title">Switch Role</div>
+        <div class="drawer-switch">
+          <div class="dsw-btn" onclick="closeDrawer();switchAppRole('farmer');showFarmerTab('home',document.querySelectorAll('#nav-farmer .nav-item')[0])">Farmer</div>
+          <div class="dsw-btn active">Buyer</div>
+          <div class="dsw-btn" onclick="closeDrawer();switchAppRole('driver');showDriverTab('home',document.querySelectorAll('#nav-driver .nav-item')[0])">Driver</div>
+        </div>
+        <div style="font-size:10px;color:var(--muted);margin-top:8px;text-align:center;">One account. All three roles.</div>
+      </div>`;
+  }else{
+    body.innerHTML=`
+      <div class="drawer-section">
+        <div class="drawer-sec-title">Account Summary</div>
+        <div class="drawer-stat"><span class="ds-label">Trips Completed</span><span class="ds-val">18</span></div>
+        <div class="drawer-stat"><span class="ds-label">Total Earned</span><span class="ds-val gold">KES 27,400</span></div>
+        <div class="drawer-stat"><span class="ds-label">Trust Score</span><span class="ds-val green">91%</span></div>
+        <div class="drawer-stat"><span class="ds-label">Vehicle</span><span class="ds-val" style="font-family:'DM Mono',monospace;">KCA 456B, Pickup</span></div>
+        <div class="drawer-stat"><span class="ds-label">Capacity</span><span class="ds-val">1,500 kg</span></div>
+        <div class="drawer-stat"><span class="ds-label">Routes</span><span class="ds-val">Nakuru, Kiambu, Muranga</span></div>
+      </div>
+      <div class="drawer-section">
+        <div class="drawer-sec-title">Switch Role</div>
+        <div class="drawer-switch">
+          <div class="dsw-btn" onclick="closeDrawer();switchAppRole('farmer');showFarmerTab('home',document.querySelectorAll('#nav-farmer .nav-item')[0])">Farmer</div>
+          <div class="dsw-btn" onclick="closeDrawer();switchAppRole('buyer');showBuyerTab('home',document.querySelectorAll('#nav-buyer .nav-item')[0])">Buyer</div>
+          <div class="dsw-btn active">Driver</div>
+        </div>
+        <div style="font-size:10px;color:var(--muted);margin-top:8px;text-align:center;">One account. All three roles.</div>
+      </div>`;
+  }
+  document.getElementById('drawer-overlay').classList.add('open');
+  document.getElementById('profile-drawer').classList.add('open');
+}
+
+function closeDrawer(){
+  document.getElementById('drawer-overlay').classList.remove('open');
+  document.getElementById('profile-drawer').classList.remove('open');
+}
+
 const ROLE_INFO={
   farmer:{label:'Farmer',   initials:'JW',name:'Jane Wanjiku', trust:'94%'},
   buyer: {label:'Buyer',    initials:'DK',name:'David Kamau',  trust:'88%'},
@@ -616,16 +744,16 @@ function renderFarmerTab(tab){
 }
 
 function farmerHome(){return`
-  <div class="sec-hd">Overview</div>
-  <div class="stat-grid">
-    <div class="stat g"><div class="stat-n">23</div><div class="stat-l">Receipts. Credit eligible.</div></div>
-    <div class="stat gr"><div class="stat-n" style="color:var(--lg)">94%</div><div class="stat-l">MazaoTrust score</div></div>
-    <div class="stat g"><div class="stat-n">2</div><div class="stat-l">Live listings</div></div>
+  <div style="padding:4px 0 10px;">
+    <div style="font-size:16px;font-weight:600;color:var(--text);">Good morning, Jane.</div>
+    <div style="font-size:11px;color:var(--muted);margin-top:2px;">2 listings live. Tap your avatar for your full profile.</div>
   </div>
-  <div class="info">Harvest date shown on listings. Buyers see how recently produce was harvested to judge freshness themselves.</div>
+  <div class="info">County floor price for tomatoes today is KES 52/kg (KACE). Your listings are priced above the floor.</div>
   <div class="sec-hd">Active Listings</div>
   ${farmerListCard(LISTINGS[0])}
   ${farmerListCard(LISTINGS[2])}
+  <div class="sec-hd" style="margin-top:4px;">Recent Activity</div>
+  <div class="sms-notif">SMS received: Buyer David Kamau confirmed escrow for 200kg Tomatoes. KES 12,400 secured. Wait for driver to show 4-digit code before loading.</div>
 `;}
 
 function farmerListCard(l){return`
@@ -741,24 +869,23 @@ function renderBuyerTab(tab){
 }
 
 function buyerHome(){return`
-  <div class="sec-hd">Overview</div>
-  <div class="stat-grid">
-    <div class="stat g"><div class="stat-n">7</div><div class="stat-l">Orders completed</div></div>
-    <div class="stat g"><div class="stat-n" style="font-size:16px;">84K</div><div class="stat-l">Total spent (KES)</div></div>
-    <div class="stat gr"><div class="stat-n">3</div><div class="stat-l">New matches today</div></div>
+  <div style="padding:4px 0 10px;">
+    <div style="font-size:16px;font-weight:600;color:var(--text);">Good morning, David.</div>
+    <div style="font-size:11px;color:var(--muted);margin-top:2px;">3 new matches today. Tap your avatar for your full profile.</div>
   </div>
-  <div class="info">Buying directly through MazaoFlow removes the broker markup. You pay farm price plus a 5% platform fee and transport. No middleman.</div>
-  <div class="sec-hd">Your buyer profile</div>
-  <div class="profile-head">
-    <div class="avatar corp">DK</div>
-    <div class="profile-info">
-      <div class="profile-name">David Kamau</div>
-      <div class="profile-type">Hotel / Restaurant</div>
-      <div class="profile-trust">${starsHTML(4,10)}<span style="font-size:10px;color:var(--muted);">88% trust score</span></div>
-    </div>
-  </div>
+  <div class="info">Buying directly through MazaoFlow removes the broker markup. You pay farm price plus a 5% platform fee and transport.</div>
   <div class="sec-hd">Top Match Today</div>
   ${buyerCardSmall(LISTINGS[5])}
+  <div class="sec-hd" style="margin-top:4px;">Standing Orders</div>
+  <div class="card">
+    <div class="card-head"><span class="card-title">Tomatoes, 500kg per order</span><span class="badge green">Active</span></div>
+    <div class="card-body">
+      <div class="row"><span class="rk">Max price</span><span class="rv">KES 65/kg</span></div>
+      <div class="row"><span class="rk">Notify me</span><span class="rv">When matching farmer posts</span></div>
+      <div class="row"><span class="rk">Last matched</span><span class="rv green">Today, 1 farmer found</span></div>
+      <button class="abtn outline" style="margin-top:6px;" onclick="showBuyerTab('market',document.querySelectorAll('#nav-buyer .nav-item')[1])">Browse full market</button>
+    </div>
+  </div>
 `;}
 
 function buyerCardSmall(l){return`
@@ -956,7 +1083,7 @@ function openPayment(lid){
       <div class="ct-row"><span class="ck save">You save</span><span class="cv gold">KES ${(broker-total).toLocaleString()}</span></div>
     </div>
     <div class="info">Funds held in escrow until delivery is confirmed with a 4-digit code. 5-minute database lock is now active. No other buyer can claim this listing.</div>
-    <div style="background:var(--off);border-radius:10px;padding:12px;margin-bottom:12px;font-size:11px;color:var(--muted);line-height:1.6;text-align:center;">An STK Push has been sent to +254 712 345 678.<br>Enter your M-Pesa PIN on your phone to confirm.</div>
+    <div style="background:var(--off);border-radius:10px;padding:12px;margin-bottom:12px;font-size:11px;color:var(--muted);line-height:1.6;text-align:center;">An STK Push has been sent to +254 700 000 001.<br>Enter your M-Pesa PIN on your phone to confirm.</div>
     <button class="abtn gold" onclick="confirmPayment(${lid})">Confirm M-Pesa PIN</button>
     <button class="abtn outline" onclick="closeFV('fv-payment')" style="margin-top:6px;">Cancel</button>`;
   closeFV('fv-listing');
@@ -1037,10 +1164,9 @@ function renderDriverTab(tab){
 }
 
 function driverHome(){return`
-  <div class="stat-grid">
-    <div class="stat g"><div class="stat-n">18</div><div class="stat-l">Trips completed</div></div>
-    <div class="stat g"><div class="stat-n" style="font-size:16px">27K</div><div class="stat-l">Earned (KES)</div></div>
-    <div class="stat gr"><div class="stat-n" style="color:var(--lg)">91%</div><div class="stat-l">MazaoTrust</div></div>
+  <div style="padding:4px 0 10px;">
+    <div style="font-size:16px;font-weight:600;color:var(--text);">Good morning, Peter.</div>
+    <div style="font-size:11px;color:var(--muted);margin-top:2px;">2 new job requests on your route. Tap your avatar for your full profile.</div>
   </div>
   <div class="vehicle-card">
     <div class="vc-title">My Vehicle</div>
@@ -1136,55 +1262,110 @@ function driverEarn(){return`
 const FP_SCREENS={
   main:[
     {t:'*384#',c:'g'},{t:'MazaoFlow v1.0',c:'d'},{t:'',c:''},
-    {t:'1. Sell Produce  (Tomatoes)',c:'g'},{t:'2. Standing Order (Buy)',c:''},
-    {t:'3. Find Transport',c:''},{t:'4. My Receipts (23)',c:''},
-    {t:'5. My Trust Score',c:''},{t:'0. Exit',c:'d'},{t:'',c:''},
-    {t:'All networks. All roles.',c:'d'},{t:'Enter option: ',c:'cur'},
+    {t:'1. Sell Tomatoes (last sold)',c:'g'},
+    {t:'2. Sell a different crop',c:''},
+    {t:'3. Standing Order (Buy)',c:''},
+    {t:'4. Find Transport',c:''},
+    {t:'5. My Receipts (23)',c:''},
+    {t:'6. My Trust Score',c:''},
+    {t:'0. Exit',c:'d'},{t:'',c:''},
+    {t:'Smart Memory shows your',c:'d'},
+    {t:'last crop as Option 1.',c:'d'},
+    {t:'Enter option: ',c:'cur'},
+  ],
+  crops:[
+    {t:'Select Crop to Sell',c:'g'},{t:'',c:''},
+    {t:'1. Onions',c:''},{t:'2. Cabbage',c:''},
+    {t:'3. Capsicum',c:''},{t:'4. Kale',c:''},
+    {t:'5. Avocado',c:''},{t:'6. Mango',c:''},
+    {t:'7. Bananas',c:''},{t:'8. Passion Fruit',c:''},
+    {t:'9. More crops...',c:'d'},
+    {t:'',c:''},{t:'0. Back',c:'d'},
+    {t:'Enter: ',c:'cur'},
   ],
   sell:[
-    {t:'Sell Produce',c:'g'},{t:'',c:''},
-    {t:'Crop: Tomatoes',c:''},{t:'Qty (kg): 500',c:''},
-    {t:'Price/kg (KES): 62',c:''},{t:'Harvest date: 19/03/2026',c:''},
+    {t:'Sell Tomatoes',c:'g'},{t:'',c:''},
+    {t:'Qty (kg): 500',c:''},
+    {t:'Price/kg (KES): 62',c:''},
+    {t:'Harvest date: 19/03/2026',c:''},
     {t:'County: NAK (Nakuru)',c:''},{t:'',c:''},
-    {t:'Floor: KES 52/kg (KACE)',c:'d'},{t:'Your price: ABOVE floor',c:'gr'},
-    {t:'',c:''},{t:'1. Confirm',c:'g'},{t:'0. Back',c:'d'},
-    {t:'Enter: ',c:'cur'},
+    {t:'Floor: KES 52/kg (KACE)',c:'d'},
+    {t:'Your price: ABOVE floor',c:'gr'},
+    {t:'',c:''},{t:'1. Confirm',c:'g'},
+    {t:'0. Back',c:'d'},{t:'Enter: ',c:'cur'},
   ],
   posted:[
     {t:'Listed!',c:'gr'},{t:'',c:''},
-    {t:'500kg Tomatoes @ KES 62',c:''},{t:'Harvest: 19/03/2026',c:'d'},
+    {t:'500kg Tomatoes @ KES 62',c:''},
+    {t:'Harvest: 19/03/2026',c:'d'},
     {t:'County: Nakuru',c:'d'},{t:'',c:''},
-    {t:'Matching buyers...',c:'g'},{t:'2 buyers notified.',c:'gr'},
-    {t:'',c:''},{t:'You will get SMS when',c:'d'},
-    {t:'escrow is funded.',c:'d'},{t:'',c:''},
-    {t:'DO NOT load until',c:'r'},{t:'driver shows 4-digit code.',c:'r'},
+    {t:'Matching buyers...',c:'g'},
+    {t:'2 buyers notified.',c:'gr'},{t:'',c:''},
+    {t:'SMS sent. Wait for escrow',c:'d'},
+    {t:'confirmation before loading.',c:'d'},
+    {t:'',c:''},
+    {t:'DO NOT load until driver',c:'r'},
+    {t:'shows 4-digit code.',c:'r'},
   ],
   buy:[
     {t:'Standing Order',c:'g'},{t:'',c:''},
-    {t:'I want to buy regularly:',c:'d'},{t:'Crop: Tomatoes',c:''},
-    {t:'Qty/week (kg): 500',c:''},{t:'Max price: KES 65/kg',c:''},
-    {t:'Delivery: Every Monday',c:''},{t:'',c:''},
-    {t:'Buyers mainly use the app',c:'d'},{t:'for browsing and purchasing.',c:'d'},
-    {t:'Standing orders work here.',c:'d'},{t:'',c:''},
-    {t:'1. Confirm standing order',c:'g'},{t:'0. Back',c:'d'},
+    {t:'Buyers browse on the app.',c:'d'},
+    {t:'Use USSD for standing orders.',c:'d'},
+    {t:'',c:''},
+    {t:'Select crop:',c:'g'},
+    {t:'1. Tomatoes',c:''},{t:'2. Onions',c:''},
+    {t:'3. Cabbage',c:''},{t:'4. Kale',c:''},
+    {t:'5. Avocado',c:''},{t:'6. More...',c:'d'},
+    {t:'',c:''},{t:'0. Back',c:'d'},
     {t:'Enter: ',c:'cur'},
+  ],
+  buy2:[
+    {t:'Tomatoes - Standing Order',c:'g'},{t:'',c:''},
+    {t:'How many kg per order?',c:'d'},{t:'',c:''},
+    {t:'Type quantity, then ENTER',c:'d'},{t:'',c:''},
+    {t:'Example: 500',c:'d'},{t:'',c:''},
+    {t:'ENTER to confirm',c:'g'},{t:'0. Back',c:'d'},
+  ],
+  buy3:[
+    {t:'Tomatoes - Standing Order',c:'g'},{t:'',c:''},
+    {t:'Qty: 500 kg confirmed',c:'gr'},{t:'',c:''},
+    {t:'Your max price per kg?',c:'d'},{t:'',c:''},
+    {t:'Type KES amount, then ENTER',c:'d'},{t:'',c:''},
+    {t:'Example: 65',c:'d'},{t:'',c:''},
+    {t:'ENTER to confirm',c:'g'},{t:'0. Back',c:'d'},
+  ],
+  buy4:[
+    {t:'Standing Order Set!',c:'gr'},{t:'',c:''},
+    {t:'Crop: Tomatoes',c:''},
+    {t:'Qty: 500 kg per order',c:''},
+    {t:'Max price: KES 65/kg',c:''},{t:'',c:''},
+    {t:'You will get SMS when a',c:'d'},
+    {t:'matching farmer posts.',c:'d'},{t:'',c:''},
+    {t:'App shows full listing.',c:'d'},
+    {t:'Pay via app or call us.',c:'d'},
   ],
   trust:[
     {t:'My MazaoTrust Score',c:'g'},{t:'',c:''},
-    {t:'Score: 94%',c:'gr'},{t:'Total reviews: 23',c:''},
-    {t:'',c:''},{t:'Top tags from buyers:',c:'d'},
-    {t:'Good quantity (18x)',c:''},{t:'Fresh produce (15x)',c:''},
+    {t:'Score: 94%',c:'gr'},
+    {t:'Total reviews: 23',c:''},{t:'',c:''},
+    {t:'Top tags from buyers:',c:'d'},
+    {t:'Good quantity (18x)',c:''},
+    {t:'Fresh produce (15x)',c:''},
     {t:'Accurate desc. (12x)',c:''},{t:'',c:''},
     {t:'Credit eligible (10+ done)',c:'gr'},
-    {t:'SMS sent on each update.',c:'d'},{t:'0. Back',c:'d'},
+    {t:'SMS sent on each update.',c:'d'},
+    {t:'0. Back',c:'d'},
   ],
   transport:[
     {t:'Find Transport',c:'g'},{t:'',c:''},
-    {t:'Pickup: Nakuru Farm',c:''},{t:'Delivery: Nairobi CBD',c:''},
+    {t:'Pickup: Nakuru Farm',c:''},
+    {t:'Delivery: Nairobi CBD',c:''},
     {t:'Cargo: 500kg Tomatoes',c:''},{t:'',c:''},
     {t:'Available transporters:',c:'d'},{t:'',c:''},
-    {t:'1. Peter Maina KCA456B',c:''},{t:'   KES 4,000  |  160km',c:'d'},
-    {t:'2. Ali Hassan KBZ123A',c:''},{t:'   KES 4,200  |  160km',c:'d'},
+    {t:'1. Peter Maina KCA456B',c:''},
+    {t:'   KES 3,200  |  160km',c:'d'},
+    {t:'2. Ali Hassan KBZ123A',c:''},
+    {t:'   KES 3,400  |  160km',c:'d'},
     {t:'',c:''},{t:'Enter choice: ',c:'cur'},
   ],
 };
@@ -1214,24 +1395,39 @@ function renderFP(s){
 function fpKey(k){
   if(fpScreen==='main'){
     if(k==='1')renderFP('sell');
-    else if(k==='2')renderFP('buy');
-    else if(k==='3')renderFP('transport');
-    else if(k==='4')renderFP('trust');
+    else if(k==='2')renderFP('crops');
+    else if(k==='3')renderFP('buy');
+    else if(k==='4')renderFP('transport');
     else if(k==='5')renderFP('trust');
+    else if(k==='6')renderFP('trust');
     else if(k==='0')renderFP('main');
+  }else if(fpScreen==='crops'){
+    if(k==='0')renderFP('main');
+    else renderFP('sell');
   }else if(fpScreen==='sell'){
     if(k==='1'){
       renderFP('posted');
       toast('MazaoMarket','Jane Wanjiku posted 500kg Tomatoes, KES 62/kg, Nakuru. App updated instantly.');
       setTimeout(()=>toast('Buyer Notified','David Kamau: New match in your area. 500kg Tomatoes, KES 62/kg.'),3500);
     }
-    else if(k==='0')renderFP('main');
+    else if(k==='0'||k==='back')renderFP('main');
   }else if(fpScreen==='buy'){
-    if(k==='1'){renderFP('main');toast('Standing Order','Order confirmed. You will be matched when produce is available.');}
-    else if(k==='0')renderFP('main');
+    if(k>='1'&&k<='6')renderFP('buy2');
+    else if(k==='0'||k==='back')renderFP('main');
+  }else if(fpScreen==='buy2'){
+    if(k==='enter')renderFP('buy3');
+    else if(k==='0'||k==='back')renderFP('buy');
+  }else if(fpScreen==='buy3'){
+    if(k==='enter'){
+      renderFP('buy4');
+      toast('Standing Order Set','You will be notified via SMS when a matching farmer posts.');
+    }
+    else if(k==='0'||k==='back')renderFP('buy2');
+  }else if(fpScreen==='buy4'){
+    renderFP('main');
   }else if(fpScreen==='transport'){
     if(k==='1'||k==='2'){renderFP('main');toast('MazaoMove','Transporter assigned. SMS sent with pickup details.');}
-    else if(k==='0')renderFP('main');
+    else if(k==='0'||k==='back')renderFP('main');
   }else{renderFP('main');}
 }
 
