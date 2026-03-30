@@ -1,0 +1,52 @@
+{
+  "farms": [
+    {
+      "farm_id": "F001",
+      "farm_name": "Sunny Acres",
+      "location": "Nairobi, Kenya",
+      "crops": ["Maize", "Beans", "Potatoes"],
+      "size_hectares": 10,
+      "owner": "John Doe",
+      "contact": "+254712345678"
+    },
+    {
+      "farm_id": "F002",
+      "farm_name": "Green Garden",
+      "location": "Mombasa, Kenya",
+      "crops": ["Tomatoes", "Kale", "Carrots"],
+      "size_hectares": 5,
+      "owner": "Jane Smith",
+      "contact": "+254723456789"
+    }
+  ],
+  "transporters": [
+    {
+      "transporter_id": "T001",
+      "name": "Fast Freight",
+      "contact_person": "Alice Wang",
+      "phone": "+254734567890",
+      "vehicle_type": "Truck"
+    },
+    {
+      "transporter_id": "T002",
+      "name": "AgriTransport",
+      "contact_person": "Bob Martin",
+      "phone": "+254745678901",
+      "vehicle_type": "Van"
+    }
+  ],
+  "buyers": [
+    {
+      "buyer_id": "B001",
+      "name": "Fresh Produce Market",
+      "location": "Nairobi, Kenya",
+      "contact": "+254756789012"
+    },
+    {
+      "buyer_id": "B002",
+      "name": "Local Grocery Store",
+      "location": "Mombasa, Kenya",
+      "contact": "+254767890123"
+    }
+  ]
+}
