@@ -1,0 +1,10 @@
+:root {
+    --color-primary: #3498db; /* Example primary color */
+    --color-secondary: #2ecc71; /* Example secondary color */
+    --font-family-sans-serif: "Helvetica Neue", Arial, sans-serif; /* Example font */
+    --font-size-base: 16px; /* Base font size */
+    --spacing-small: 8px; /* Small spacing */
+    --spacing-medium: 16px; /* Medium spacing */
+    --spacing-large: 32px; /* Large spacing */
+    /* Add more custom properties and design tokens as needed */
+}
